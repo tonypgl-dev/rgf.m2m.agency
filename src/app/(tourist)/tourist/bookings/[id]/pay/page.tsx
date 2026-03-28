@@ -1,7 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { createServiceClient } from "@/lib/supabase/service";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 import { PaymentForm } from "@/components/shared/payment-form";
 import { Separator } from "@/components/ui/separator";
 
@@ -62,7 +62,7 @@ export default async function PayPage({
   let clientSecret: string;
 
   if (booking.stripe_payment_intent_id) {
-    const pi = await stripe.paymentIntents.retrieve(
+    const pi = await getStripe().paymentIntents.retrieve(
       booking.stripe_payment_intent_id
     );
     if (pi.status === "succeeded") redirect(`/tourist/bookings/${id}`);
@@ -71,7 +71,7 @@ export default async function PayPage({
     const amount = Math.round(Number(booking.total_price) * 100); // cents
     const applicationFee = Math.round(amount * 0.25); // 25% platform fee
 
-    const pi = await stripe.paymentIntents.create({
+    const pi = await getStripe().paymentIntents.create({
       amount,
       currency: "usd",
       application_fee_amount: applicationFee,

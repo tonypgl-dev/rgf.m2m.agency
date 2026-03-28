@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createServiceClient } from "@/lib/supabase/service";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 
 export async function POST(request: Request) {
   const supabase = await createClient();
@@ -26,7 +26,7 @@ export async function POST(request: Request) {
   let accountId = companion.stripe_account_id as string | null;
 
   if (!accountId) {
-    const account = await stripe.accounts.create({
+    const account = await getStripe().accounts.create({
       type: "express",
       capabilities: {
         card_payments: { requested: true },
@@ -52,7 +52,7 @@ export async function POST(request: Request) {
     process.env.NEXT_PUBLIC_SITE_URL ??
     "http://localhost:3000";
 
-  const accountLink = await stripe.accountLinks.create({
+  const accountLink = await getStripe().accountLinks.create({
     account: accountId,
     refresh_url: `${origin}/companion/profile?stripe=refresh`,
     return_url: `${origin}/companion/profile?stripe=success`,
