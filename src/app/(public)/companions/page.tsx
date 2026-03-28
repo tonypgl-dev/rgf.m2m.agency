@@ -85,9 +85,13 @@ export default async function CompanionsPage({
               No companions match your filters.
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-start">
               {cards.map((c) => (
-                <CompanionCard key={c.id} c={c} />
+                <CompanionCard
+                  key={c.id}
+                  c={c}
+                  featured={c.id === "dddddddd-0000-0000-0000-000000000004"}
+                />
               ))}
             </div>
           )}

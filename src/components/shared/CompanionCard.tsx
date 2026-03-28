@@ -17,7 +17,13 @@ export interface CompanionCardData {
   hourlyRate: number | null;
 }
 
-export function CompanionCard({ c }: { c: CompanionCardData }) {
+export function CompanionCard({
+  c,
+  featured,
+}: {
+  c: CompanionCardData;
+  featured?: boolean;
+}) {
   const initials = c.fullName
     ? c.fullName
         .split(" ")
@@ -31,86 +37,125 @@ export function CompanionCard({ c }: { c: CompanionCardData }) {
   const extraActivities = c.activities.length - visibleActivities.length;
 
   return (
-    <div className="flex flex-col rounded-2xl border bg-background overflow-hidden hover:shadow-md transition-shadow">
-      {/* Top: avatar + name + city */}
-      <div className="p-4 pb-3 flex items-start gap-3">
-        <Avatar className="h-14 w-14 shrink-0">
-          <AvatarImage src={c.avatarUrl ?? undefined} alt={c.fullName ?? ""} />
-          <AvatarFallback className="text-base font-semibold">
-            {initials}
-          </AvatarFallback>
-        </Avatar>
-
-        <div className="min-w-0 flex-1">
-          <p className="font-semibold truncate">{c.fullName ?? "Companion"}</p>
-
-          {c.city && (
-            <p className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
-              <MapPin className="h-3 w-3 shrink-0" />
-              <span className="truncate">{c.city}</span>
-            </p>
-          )}
-
-          {/* Rating */}
-          <div className="flex items-center gap-1 mt-1">
-            <Star className="h-3.5 w-3.5 fill-amber-400 stroke-amber-400" />
-            <span className="text-sm font-medium">
-              {c.totalReviews > 0
-                ? Number(c.ratingAvg).toFixed(1)
-                : "New"}
-            </span>
-            {c.totalReviews > 0 && (
-              <span className="text-xs text-muted-foreground">
-                ({c.totalReviews})
-              </span>
+    /* Outer wrapper — gives room for the badge that floats above the card */
+    <div className={cn("relative", featured && "pt-5")}>
+      {/* ── "CEA MAI BUNA" ribbon badge ── */}
+      {featured && (
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 z-10 pointer-events-none">
+          <span
+            className={cn(
+              "inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full",
+              "bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400",
+              "text-amber-900 text-[11px] font-extrabold tracking-wide uppercase",
+              "shadow-[0_2px_12px_rgba(251,191,36,0.7)]",
+              "ring-1 ring-amber-300/60",
+              "whitespace-nowrap select-none"
             )}
+          >
+            🎀 Cea mai bună
+          </span>
+        </div>
+      )}
+
+      {/* ── Card ── */}
+      <div
+        className={cn(
+          "flex flex-col rounded-2xl border bg-background overflow-hidden transition-shadow",
+          featured
+            ? [
+                "border-amber-400",
+                "shadow-[0_0_0_1px_#fbbf24,0_0_28px_6px_rgba(251,191,36,0.30)]",
+                "hover:shadow-[0_0_0_1px_#fbbf24,0_0_40px_10px_rgba(251,191,36,0.40)]",
+              ]
+            : "hover:shadow-md"
+        )}
+      >
+        {/* Top: avatar + name + city */}
+        <div className="p-4 pb-3 flex items-start gap-3">
+          <Avatar className="h-14 w-14 shrink-0">
+            <AvatarImage src={c.avatarUrl ?? undefined} alt={c.fullName ?? ""} />
+            <AvatarFallback className="text-base font-semibold">
+              {initials}
+            </AvatarFallback>
+          </Avatar>
+
+          <div className="min-w-0 flex-1">
+            <p className="font-semibold truncate">{c.fullName ?? "Companion"}</p>
+
+            {c.city && (
+              <p className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
+                <MapPin className="h-3 w-3 shrink-0" />
+                <span className="truncate">{c.city}</span>
+              </p>
+            )}
+
+            {/* Rating */}
+            <div className="flex items-center gap-1 mt-1">
+              <Star className="h-3.5 w-3.5 fill-amber-400 stroke-amber-400" />
+              <span className="text-sm font-medium">
+                {c.totalReviews > 0
+                  ? Number(c.ratingAvg).toFixed(1)
+                  : "New"}
+              </span>
+              {c.totalReviews > 0 && (
+                <span className="text-xs text-muted-foreground">
+                  ({c.totalReviews})
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* Price */}
+          <div className="text-right shrink-0">
+            <p className="text-base font-bold">€{c.hourlyRate ?? "—"}</p>
+            <p className="text-[11px] text-muted-foreground">/hour</p>
           </div>
         </div>
 
-        {/* Price */}
-        <div className="text-right shrink-0">
-          <p className="text-base font-bold">
-            €{c.hourlyRate ?? "—"}
-          </p>
-          <p className="text-[11px] text-muted-foreground">/hour</p>
-        </div>
-      </div>
+        {/* Languages */}
+        {c.languages.length > 0 && (
+          <div className="px-4 pb-2 flex flex-wrap gap-1">
+            {c.languages.map((lang) => (
+              <Badge key={lang} variant="secondary" className="text-xs px-2 py-0">
+                {lang}
+              </Badge>
+            ))}
+          </div>
+        )}
 
-      {/* Languages */}
-      {c.languages.length > 0 && (
-        <div className="px-4 pb-2 flex flex-wrap gap-1">
-          {c.languages.map((lang) => (
-            <Badge key={lang} variant="secondary" className="text-xs px-2 py-0">
-              {lang}
-            </Badge>
-          ))}
-        </div>
-      )}
+        {/* Activities */}
+        {visibleActivities.length > 0 && (
+          <div className="px-4 pb-3 flex flex-wrap gap-1">
+            {visibleActivities.map((act) => (
+              <Badge key={act} variant="outline" className="text-xs px-2 py-0">
+                {act}
+              </Badge>
+            ))}
+            {extraActivities > 0 && (
+              <Badge
+                variant="outline"
+                className="text-xs px-2 py-0 text-muted-foreground"
+              >
+                +{extraActivities} more
+              </Badge>
+            )}
+          </div>
+        )}
 
-      {/* Activities */}
-      {visibleActivities.length > 0 && (
-        <div className="px-4 pb-3 flex flex-wrap gap-1">
-          {visibleActivities.map((act) => (
-            <Badge key={act} variant="outline" className="text-xs px-2 py-0">
-              {act}
-            </Badge>
-          ))}
-          {extraActivities > 0 && (
-            <Badge variant="outline" className="text-xs px-2 py-0 text-muted-foreground">
-              +{extraActivities} more
-            </Badge>
-          )}
+        {/* CTA */}
+        <div className="mt-auto px-4 pb-4">
+          <Link
+            href={`/companions/${c.id}`}
+            className={cn(
+              buttonVariants({ size: "sm" }),
+              "w-full justify-center",
+              featured &&
+                "bg-amber-500 hover:bg-amber-600 border-amber-500 text-white"
+            )}
+          >
+            View Profile
+          </Link>
         </div>
-      )}
-
-      {/* CTA */}
-      <div className="mt-auto px-4 pb-4">
-        <Link
-          href={`/companions/${c.id}`}
-          className={cn(buttonVariants({ size: "sm" }), "w-full justify-center")}
-        >
-          View Profile
-        </Link>
       </div>
     </div>
   );
