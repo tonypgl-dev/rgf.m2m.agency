@@ -79,7 +79,7 @@ export default function RegisterPage() {
           <CardDescription>
             {step === 1
               ? "Step 1 of 2 — Account details"
-              : `Step 2 of 2 — ${step1Data?.role === "companion" ? "Companion" : "Tourist"} details`}
+              : `Step 2 of 2 — ${step1Data?.role === "companion" ? "Guide" : "Tourist"} details`}
           </CardDescription>
         </CardHeader>
 
@@ -151,7 +151,7 @@ export default function RegisterPage() {
                         className="sr-only"
                         {...step1.register("role")}
                       />
-                      {role.charAt(0).toUpperCase() + role.slice(1)}
+                      {role === "companion" ? "Guide" : "Tourist"}
                     </label>
                   ))}
                 </div>
@@ -220,7 +220,7 @@ export default function RegisterPage() {
                 />
               </div>
 
-              {/* Companion-only fields */}
+              {/* Guide-only fields */}
               {isCompanion && (
                 <>
                   <div className="space-y-1.5">

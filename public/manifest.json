@@ -1,7 +1,7 @@
 {
-  "name": "RentGF",
-  "short_name": "RentGF",
-  "description": "Connect tourists with local companions",
+  "name": "Roamly — Your local guide in Romania",
+  "short_name": "Roamly",
+  "description": "Your local guide in Romania.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

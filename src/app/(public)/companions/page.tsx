@@ -1,6 +1,9 @@
 import { createClient } from "@/lib/supabase/server";
-import { CompanionCard, type CompanionCardData } from "@/components/shared/CompanionCard";
+import type { CompanionCardData } from "@/components/shared/CompanionCard";
 import { CompanionsFilters } from "./companions-filters";
+import { MasonryGrid } from "@/components/shared/MasonryGrid";
+
+const FEATURED_ID = "dddddddd-0000-0000-0000-000000000004";
 
 export default async function CompanionsPage({
   searchParams,
@@ -14,24 +17,24 @@ export default async function CompanionsPage({
   let query = supabase
     .from("companions")
     .select(`
-      id, profile_id, hourly_rate, languages, activities, rating_avg, total_reviews,
+      id, profile_id, hourly_rate, languages, activities, rating_avg, total_reviews, verified, photos,
       profiles!inner(full_name, avatar_url, city)
     `)
     .eq("verified", true)
     .order("rating_avg", { ascending: false });
 
-  if (city && typeof city === "string") {
-    query = query.eq("profiles.city", city);
+  if (city     && typeof city     === "string") query = query.eq("profiles.city", city);
+  if (language && typeof language === "string") query = query.contains("languages", [language]);
+  
+  if (activity) {
+    const activitiesArr = Array.isArray(activity) ? activity : [activity];
+    if (activitiesArr.length > 0) {
+      // "AND" logic: all selected activities must be present in the guide's activities array
+      query = query.contains("activities", activitiesArr);
+    }
   }
-  if (language && typeof language === "string") {
-    query = query.contains("languages", [language]);
-  }
-  if (activity && typeof activity === "string") {
-    query = query.contains("activities", [activity]);
-  }
-  if (maxPrice && typeof maxPrice === "string") {
-    query = query.lte("hourly_rate", Number(maxPrice));
-  }
+
+  if (maxPrice && typeof maxPrice === "string") query = query.lte("hourly_rate", Number(maxPrice));
 
   const { data: companions } = await query;
 
@@ -43,60 +46,53 @@ export default async function CompanionsPage({
     } | null;
 
     return {
-      id: c.id,
-      fullName: profile?.full_name ?? null,
-      city: profile?.city ?? null,
-      avatarUrl: profile?.avatar_url ?? null,
-      languages: c.languages ?? [],
-      activities: c.activities ?? [],
-      ratingAvg: Number(c.rating_avg),
+      id:           c.id,
+      fullName:     profile?.full_name ?? null,
+      city:         profile?.city ?? null,
+      avatarUrl:    profile?.avatar_url ?? null,
+      photos:       (c.photos as string[] | null) ?? [],
+      languages:    c.languages ?? [],
+      activities:   c.activities ?? [],
+      ratingAvg:    Number(c.rating_avg),
       totalReviews: c.total_reviews,
-      hourlyRate: c.hourly_rate !== null ? Number(c.hourly_rate) : null,
+      hourlyRate:   c.hourly_rate !== null ? Number(c.hourly_rate) : null,
+      verified:     Boolean(c.verified),
     };
   });
 
   const filterValues = {
-    city: typeof city === "string" ? city : "",
+    city:     typeof city     === "string" ? city     : "",
     language: typeof language === "string" ? language : "",
-    activity: typeof activity === "string" ? activity : "",
+    activity: activity ?? [],
     maxPrice: typeof maxPrice === "string" ? maxPrice : "",
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      {/* Page heading (mobile) */}
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold tracking-tight">Browse companions</h1>
+    <div>
+      {/* ── Page heading ── */}
+      <div className="px-4 pt-6 pb-2">
+        <h1 className="text-2xl font-bold tracking-tight">
+          Find your local guide
+        </h1>
         <p className="text-sm text-muted-foreground mt-1">
           {cards.length} verified local{cards.length === 1 ? " guide" : " guides"} available
         </p>
       </div>
 
-      <div className="flex gap-6 items-start">
-        {/* Filters — renders sidebar on desktop, button on mobile */}
+      {/* ── Filter bar: sticky below nav (h-14 = 56px = top-14) ── */}
+      <div className="sticky top-14 z-30 bg-white border-b border-border/60">
         <CompanionsFilters initial={filterValues} />
-
-        {/* Grid */}
-        <div className="flex-1 min-w-0">
-          {/* Mobile filter button is rendered inside CompanionsFilters */}
-
-          {cards.length === 0 ? (
-            <div className="rounded-xl border bg-background p-10 text-center text-muted-foreground">
-              No companions match your filters.
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-start">
-              {cards.map((c) => (
-                <CompanionCard
-                  key={c.id}
-                  c={c}
-                  featured={c.id === "dddddddd-0000-0000-0000-000000000004"}
-                />
-              ))}
-            </div>
-          )}
-        </div>
       </div>
+
+      {/* ── Masonry grid: edge-to-edge ── */}
+      {cards.length === 0 ? (
+        <div className="px-4 py-16 text-center text-muted-foreground">
+          <p className="font-medium">No guides match your filters.</p>
+          <p className="text-sm mt-1">Try removing a filter.</p>
+        </div>
+      ) : (
+        <MasonryGrid cards={cards} featuredId={FEATURED_ID} />
+      )}
     </div>
   );
 }

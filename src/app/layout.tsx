@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Footer } from "@/components/shared/footer";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,18 +14,54 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RentGF",
-  description: "Connect tourists with local companions",
+  metadataBase: new URL("https://roamly.ro"),
+  title: "Roamly — Your local guide in Romania",
+  description:
+    "Book a verified local for dinner, city tours, hiking & more. Real people. Real experiences.",
+  openGraph: {
+    title: "Roamly — Your local guide in Romania.",
+    description:
+      "Book a verified local for dinner, city tours, hiking & more. Real people. Real experiences.",
+    url: "https://roamly.ro",
+    siteName: "Roamly",
+    images: [
+      {
+        url: "https://roamly.ro/og-landscape.png",
+        width: 1200,
+        height: 630,
+        alt: "Roamly — Your local guide in Romania.",
+      },
+      {
+        url: "https://roamly.ro/og-portrait.png",
+        width: 630,
+        height: 840,
+        alt: "Roamly — Your local guide in Romania.",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Roamly — Your local guide in Romania.",
+    description:
+      "Book a verified local for dinner, city tours, hiking & more.",
+    images: ["https://roamly.ro/og-landscape.png"],
+  },
+  icons: {
+    icon: "/logo.png",
+    apple: "/og-portrait.png",
+  },
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "RentGF",
+    title: "Roamly — Your local guide in Romania",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#1F1F2E",
 };
 
 export default function RootLayout({
@@ -37,7 +74,10 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <div className="flex-1 flex flex-col min-h-0">{children}</div>
+        <Footer />
+      </body>
     </html>
   );
 }

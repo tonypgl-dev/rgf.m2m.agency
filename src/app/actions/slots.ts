@@ -22,7 +22,7 @@ export async function addSlotAction(data: {
     .eq("profile_id", user.id)
     .single();
 
-  if (!companion) return { error: "Not a companion" };
+  if (!companion) return { error: "Not a guide account" };
 
   const { error } = await supabase.from("availability_slots").insert({
     companion_id: companion.id,
@@ -49,7 +49,7 @@ export async function removeSlotAction(slotId: string): Promise<ActionResult> {
     .eq("profile_id", user.id)
     .single();
 
-  if (!companion) return { error: "Not a companion" };
+  if (!companion) return { error: "Not a guide account" };
 
   // Only allow removing unbooked slots
   const { error } = await supabase

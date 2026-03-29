@@ -52,7 +52,7 @@ export async function markCompleteAction(bookingId: string): Promise<ActionResul
     .eq("profile_id", user.id)
     .single();
 
-  if (!companion) return { error: "Not a companion" };
+  if (!companion) return { error: "Not a guide account" };
 
   const { error } = await supabase
     .from("bookings")

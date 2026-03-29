@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { useRouter } from "next/navigation";
 import {
   ChevronLeft,
@@ -30,6 +30,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createBookingAction } from "@/app/actions/bookings";
+import { RoamlyBadge } from "@/components/shared/roamly-badge";
 import type { Companion, Profile, AvailabilitySlot } from "@/types";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -42,6 +43,75 @@ interface Props {
   companion: CompanionFull;
   slots: AvailabilitySlot[];
   isLoggedIn: boolean;
+}
+
+// ─── Photo gallery ────────────────────────────────────────────────────────────
+
+function ProfilePhotoGallery({ photos, name }: { photos: string[]; name: string }) {
+  const [idx, setIdx] = useState(0);
+  const touchStartX = useRef(0);
+
+  function prev() { setIdx((i) => (i - 1 + photos.length) % photos.length); }
+  function next() { setIdx((i) => (i + 1) % photos.length); }
+
+  return (
+    <div className="relative aspect-[4/3] sm:aspect-[16/9] rounded-2xl overflow-hidden bg-muted -mx-4 sm:mx-0">
+      {/* Gradient placeholder */}
+      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-purple-200 to-pink-200">
+        <span className="text-6xl font-bold text-white">{name[0]?.toUpperCase()}</span>
+      </div>
+
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        key={photos[idx]}
+        src={photos[idx]}
+        alt={name}
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+
+      {/* Gradient overlay at bottom */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+
+      {/* Arrows */}
+      {photos.length > 1 && (
+        <>
+          <button
+            type="button"
+            onClick={prev}
+            className="absolute left-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/60 transition-colors z-10"
+            aria-label="Previous photo"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          <button
+            type="button"
+            onClick={next}
+            className="absolute right-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/60 transition-colors z-10"
+            aria-label="Next photo"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </>
+      )}
+
+      {/* Dots */}
+      {photos.length > 1 && (
+        <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 pointer-events-none z-10">
+          {photos.map((_, i) => (
+            <span
+              key={i}
+              className="rounded-full transition-colors"
+              style={{
+                width: 6,
+                height: 6,
+                backgroundColor: i === idx ? "white" : "rgba(255,255,255,0.45)",
+              }}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
 }
 
 // ─── Date / time helpers ──────────────────────────────────────────────────────
@@ -276,19 +346,31 @@ export function CompanionProfileClient({ companion, slots, isLoggedIn }: Props) 
       {/* ───────────────────── Page content ───────────────────── */}
       <div className="max-w-3xl mx-auto px-4 py-8 pb-28 md:pb-12 space-y-8">
 
+        {/* ── Photo gallery ── */}
+        {(companion.photos?.length > 0 || profile.avatar_url) && (
+          <ProfilePhotoGallery
+            photos={
+              companion.photos?.length > 0
+                ? companion.photos
+                : [profile.avatar_url!]
+            }
+            name={profile.full_name ?? "Guide"}
+          />
+        )}
+
         {/* Header */}
         <div className="flex gap-4 items-start">
-          <Avatar className="h-20 w-20 flex-shrink-0 text-lg">
-            {profile.avatar_url && (
-              <AvatarImage src={profile.avatar_url} alt={profile.full_name ?? ""} />
-            )}
-            <AvatarFallback>{avatarInitials}</AvatarFallback>
-          </Avatar>
+          {/* Small avatar shown only when no gallery */}
+          {!(companion.photos?.length > 0 || profile.avatar_url) && (
+            <Avatar className="h-20 w-20 flex-shrink-0 text-lg">
+              <AvatarFallback>{avatarInitials}</AvatarFallback>
+            </Avatar>
+          )}
 
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
               <h1 className="text-2xl font-semibold tracking-tight">
-                {profile.full_name ?? "Companion"}
+                {profile.full_name ?? "Guide"}
               </h1>
               {companion.verified && (
                 <CheckCircle2 className="h-5 w-5 text-blue-500 flex-shrink-0" />
@@ -313,17 +395,23 @@ export function CompanionProfileClient({ companion, slots, isLoggedIn }: Props) 
               )}
             </div>
 
+            {companion.verified && (
+              <div className="mt-3">
+                <RoamlyBadge />
+              </div>
+            )}
+
             {companion.hourly_rate != null && (
               <p className="mt-2 text-lg font-semibold">
-                ${companion.hourly_rate}
+                €{companion.hourly_rate}
                 <span className="text-sm font-normal text-muted-foreground"> / hr</span>
               </p>
             )}
           </div>
 
-          {/* Desktop Book Now */}
+          {/* Desktop */}
           <Button size="lg" onClick={openSheet} className="hidden md:flex flex-shrink-0">
-            Book Now
+            Book a Guide
           </Button>
         </div>
 
@@ -433,7 +521,7 @@ export function CompanionProfileClient({ companion, slots, isLoggedIn }: Props) 
             </div>
           )}
           <Button size="lg" onClick={openSheet} className="flex-1">
-            Book Now
+            Book a Guide
           </Button>
         </div>
       </div>
@@ -593,7 +681,7 @@ export function CompanionProfileClient({ companion, slots, isLoggedIn }: Props) 
             {step === 3 && selectedSlot && (
               <>
                 <div className="rounded-lg border p-4 space-y-4 text-sm">
-                  {/* Companion info */}
+                  {/* Guide summary */}
                   <div className="flex items-center gap-3">
                     <Avatar className="h-10 w-10">
                       {profile.avatar_url && (

@@ -146,7 +146,7 @@ export default async function TouristBookingPage({
         <div className="rounded-xl border bg-background p-6 space-y-4 text-sm">
           <div>
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">
-              Companion
+              Guide
             </p>
             <p className="font-medium">{companionProfile?.full_name ?? "—"}</p>
             {companionProfile?.city && (

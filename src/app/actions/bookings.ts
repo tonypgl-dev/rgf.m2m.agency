@@ -73,7 +73,7 @@ export async function companionCancelBookingAction(
     .eq("profile_id", user.id)
     .single();
 
-  if (!companion) return { error: "Not a companion" };
+  if (!companion) return { error: "Not a guide account" };
 
   // Only pending bookings can be cancelled by companion
   const { data: booking } = await supabase

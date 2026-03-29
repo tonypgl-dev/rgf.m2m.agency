@@ -1,35 +1,35 @@
-import { CompanionCardSkeleton } from "@/components/shared/CompanionCard";
+// Skeleton aspects mirror MasonryGrid's ASPECTS array
+const ASPECTS = ["3/4", "4/5", "2/3", "3/4", "2/3", "4/5", "3/4", "4/5", "2/3", "3/4", "2/3", "4/5"];
 
 export default function CompanionsLoading() {
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      <div className="mb-6">
-        <div className="h-8 bg-muted rounded w-48 animate-pulse" />
-        <div className="h-4 bg-muted rounded w-32 mt-2 animate-pulse" />
+    <div>
+      {/* Heading skeleton */}
+      <div className="px-4 pt-6 pb-2 space-y-2">
+        <div className="h-7 bg-muted rounded w-56 animate-pulse" />
+        <div className="h-4 bg-muted rounded w-36 animate-pulse" />
       </div>
 
-      <div className="flex gap-6 items-start">
-        {/* Sidebar skeleton */}
-        <aside className="hidden md:block w-56 shrink-0">
-          <div className="rounded-xl border bg-background p-4 space-y-4 animate-pulse">
-            <div className="h-4 bg-muted rounded w-16" />
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="space-y-1.5">
-                <div className="h-3 bg-muted rounded w-20" />
-                <div className="h-9 bg-muted rounded" />
-              </div>
-            ))}
-          </div>
-        </aside>
+      {/* Filter bar skeleton */}
+      <div className="h-[45px] bg-white border-b border-border/60 flex items-center px-4 gap-2">
+        {[64, 80, 60, 72, 68, 80].map((w, i) => (
+          <div
+            key={i}
+            className="h-7 rounded-full bg-muted animate-pulse shrink-0"
+            style={{ width: w }}
+          />
+        ))}
+      </div>
 
-        {/* Grid skeleton */}
-        <div className="flex-1">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <CompanionCardSkeleton key={i} />
-            ))}
-          </div>
-        </div>
+      {/* Masonry skeleton */}
+      <div className="columns-2 sm:columns-3 lg:columns-4" style={{ columnGap: "1px" }}>
+        {ASPECTS.map((ratio, i) => (
+          <div
+            key={i}
+            className="break-inside-avoid shimmer"
+            style={{ aspectRatio: ratio, marginBottom: "1px" }}
+          />
+        ))}
       </div>
     </div>
   );

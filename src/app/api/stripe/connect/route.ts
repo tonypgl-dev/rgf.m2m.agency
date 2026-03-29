@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     .single();
 
   if (error || !companion) {
-    return NextResponse.json({ error: "Companion profile not found" }, { status: 404 });
+    return NextResponse.json({ error: "Guide profile not found" }, { status: 404 });
   }
 
   let accountId = companion.stripe_account_id as string | null;

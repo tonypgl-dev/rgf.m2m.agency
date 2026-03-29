@@ -80,17 +80,17 @@ export function CompanionProfileForm({ profile, companion }: Props) {
         </CardContent>
       </Card>
 
-      {/* Companion details */}
+      {/* Guide profile */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Companion details</CardTitle>
+          <CardTitle className="text-base">Guide profile</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-1.5">
             <Label htmlFor="bio">Bio</Label>
             <Textarea
               id="bio"
-              placeholder="Tell tourists about yourself, your experience, and what makes you a great companion…"
+              placeholder="Tell travelers what you love about your city and what makes you a great local guide…"
               rows={4}
               {...register("bio")}
             />

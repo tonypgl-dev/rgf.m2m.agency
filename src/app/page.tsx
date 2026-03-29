@@ -1,30 +1,40 @@
 import Link from "next/link";
 import { PublicNav } from "@/components/shared/public-nav";
-import { buttonVariants } from "@/lib/button-variants";
 import { cn } from "@/lib/utils";
-import { Search, CalendarCheck, MapPin } from "lucide-react";
 
-const HOW_IT_WORKS = [
+const STEPS = [
   {
-    icon: Search,
-    step: "1",
-    title: "Browse local companions",
+    num: "01",
+    title: "Browse verified local guides in your city",
     description:
-      "Explore verified local guides across Romania. Filter by city, language, activity and price.",
+      "See who’s available where you’re staying — languages, activities, and rates up front.",
   },
   {
-    icon: CalendarCheck,
-    step: "2",
-    title: "Book a time slot",
+    num: "02",
+    title: "Book a few hours — dinner, tour, coffee, hiking",
     description:
-      "Pick an available slot, choose your activity and meeting point, then pay securely online.",
+      "Pick a time that works, choose what you want to do, and pay securely in the app.",
   },
   {
-    icon: MapPin,
-    step: "3",
-    title: "Explore together",
+    num: "03",
+    title: "Explore Romania like you actually live here",
     description:
-      "Your companion meets you and shows you the Romania that tourists never see.",
+      "Spend time with someone who knows the city — not a script, not a bus tour.",
+  },
+];
+
+const TRUST = [
+  {
+    title: "Verified locals only",
+    body: "Every guide is reviewed by Roamly before they go live.",
+  },
+  {
+    title: "English & more",
+    body: "English across the platform; many guides also speak Spanish and at least one other language.",
+  },
+  {
+    title: "Safe & transparent",
+    body: "Pay through the app and rate your experience after.",
   },
 ];
 
@@ -34,70 +44,69 @@ export default function LandingPage() {
       <PublicNav />
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="flex-1 flex flex-col items-center justify-center text-center px-4 py-20 bg-gradient-to-b from-background to-muted/40">
-        <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-4">
-          Local experiences · Romania
-        </p>
-
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight max-w-2xl">
-          Meet a local.
-          <br />
-          <span className="text-primary">Explore Romania</span> together.
-        </h1>
-
-        <p className="mt-6 text-lg text-muted-foreground max-w-xl">
-          Skip the tour buses. Book a verified local companion for a real, personal
-          experience — city walks, dinners, cultural visits and more.
-        </p>
-
-        <div className="mt-8 flex flex-col sm:flex-row gap-3 w-full max-w-xs sm:max-w-none sm:w-auto">
-          <Link
-            href="/companions"
-            className={cn(
-              buttonVariants({ size: "lg" }),
-              "px-8 justify-center"
-            )}
-          >
-            Find your companion
-          </Link>
-          <a
-            href="#how-it-works"
-            className={cn(
-              buttonVariants({ variant: "outline", size: "lg" }),
-              "px-8 justify-center"
-            )}
-          >
-            How it works
-          </a>
+      <section className="relative bg-foreground text-white flex flex-col items-center justify-center text-center px-4 py-28 sm:py-36 min-h-[88vh]">
+        <div
+          aria-hidden
+          className="absolute inset-0 overflow-hidden pointer-events-none"
+        >
+          <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-accent/15 blur-[120px]" />
         </div>
 
-        {/* Trust line */}
-        <p className="mt-8 text-xs text-muted-foreground">
-          All companions are verified · Secure payments · Real reviews
-        </p>
+        <div className="relative z-10 max-w-3xl mx-auto">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/40 mb-8">
+            Roamly · Romania
+          </p>
+
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.04]">
+            Your local guide in Romania.
+          </h1>
+
+          <p className="mt-7 text-base sm:text-lg text-white/60 max-w-lg mx-auto leading-relaxed">
+            Book a verified local for dinner, city tours, hiking, or a night out. Real
+            people. Real experiences.
+          </p>
+
+          <div className="mt-10 flex flex-col sm:flex-row gap-3 items-center justify-center">
+            <Link
+              href="/companions"
+              className={cn(
+                "inline-flex items-center justify-center gap-2 rounded-full",
+                "bg-accent-warm text-white font-semibold text-base",
+                "px-8 py-3.5 hover:bg-accent-warm/90 transition-colors",
+                "shadow-[0_4px_24px_rgba(251,146,60,0.45)]"
+              )}
+            >
+              Find a guide →
+            </Link>
+            <a
+              href="#how-it-works"
+              className={cn(
+                "inline-flex items-center justify-center rounded-full",
+                "border border-white/20 text-white/70 hover:text-white hover:border-white/40",
+                "font-medium text-sm px-7 py-3.5 transition-colors"
+              )}
+            >
+              How it works
+            </a>
+          </div>
+        </div>
       </section>
 
       {/* ── How it works ─────────────────────────────────────────────────── */}
-      <section
-        id="how-it-works"
-        className="bg-background border-t py-16 px-4"
-      >
+      <section id="how-it-works" className="bg-background border-t py-20 px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center tracking-tight mb-2">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-center mb-16">
             How it works
           </h2>
-          <p className="text-center text-muted-foreground mb-12">
-            Book a local experience in three simple steps.
-          </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-            {HOW_IT_WORKS.map(({ icon: Icon, step, title, description }) => (
-              <div key={step} className="flex flex-col items-center text-center">
-                <div className="flex items-center justify-center h-14 w-14 rounded-2xl bg-primary/10 mb-4">
-                  <Icon className="h-6 w-6 text-primary" />
-                </div>
-                <span className="text-xs font-bold uppercase tracking-widest text-primary mb-2">
-                  Step {step}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-8">
+            {STEPS.map(({ num, title, description }) => (
+              <div key={num} className="flex flex-col">
+                <span
+                  className="text-5xl font-bold tabular-nums leading-none mb-5 select-none"
+                  style={{ color: "oklch(0.165 0.025 264 / 0.08)" }}
+                >
+                  {num}
                 </span>
                 <h3 className="font-semibold text-base mb-2">{title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
@@ -109,28 +118,62 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* ── Trust ────────────────────────────────────────────────────────── */}
+      <section className="bg-muted/50 border-t py-16 px-4">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-xl font-bold tracking-tight text-center mb-10">
+            Why travelers choose Roamly
+          </h2>
+          <ul className="space-y-6">
+            {TRUST.map((item) => (
+              <li key={item.title} className="text-center sm:text-left">
+                <p className="font-semibold text-foreground">{item.title}</p>
+                <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
+                  {item.body}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ── What Roamly is NOT ───────────────────────────────────────────── */}
+      <section className="bg-background border-t py-10 px-4">
+        <div className="max-w-2xl mx-auto text-center">
+          <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+            Roamly is a social companionship and local guide platform. It is not a dating
+            app, escort service, or traditional tour agency. All guides follow our{" "}
+            <Link
+              href="#"
+              className="text-foreground/80 underline underline-offset-2 hover:text-foreground"
+            >
+              community guidelines
+            </Link>
+            .
+          </p>
+        </div>
+      </section>
+
       {/* ── Bottom CTA ───────────────────────────────────────────────────── */}
-      <section className="bg-muted/40 border-t py-14 px-4 text-center">
+      <section className="bg-muted/50 border-t py-16 px-4 text-center">
         <h2 className="text-2xl font-bold tracking-tight mb-3">
-          Ready to explore Romania differently?
+          Ready to see Romania with a local?
         </h2>
-        <p className="text-muted-foreground mb-6 max-w-sm mx-auto">
-          Dozens of local companions waiting to show you their city.
+        <p className="text-muted-foreground mb-7 max-w-md mx-auto text-sm">
+          Browse guides in Bucharest, Cluj, Brașov, and more — book when you&apos;re ready.
         </p>
         <Link
           href="/companions"
           className={cn(
-            buttonVariants({ size: "lg" }),
-            "px-10 justify-center"
+            "inline-flex items-center justify-center rounded-full",
+            "bg-foreground text-primary-foreground font-semibold",
+            "px-9 py-3.5 hover:bg-foreground/90 transition-colors"
           )}
         >
-          Browse companions
+          Browse guides
         </Link>
       </section>
 
-      <footer className="border-t py-6 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} RentGF — Local companion experiences in Romania
-      </footer>
     </div>
   );
 }

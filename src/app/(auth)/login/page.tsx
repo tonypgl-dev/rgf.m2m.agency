@@ -49,7 +49,7 @@ function LoginForm() {
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className="text-2xl">Welcome back</CardTitle>
-          <CardDescription>Sign in to your RentGF account</CardDescription>
+          <CardDescription>Sign in to your Roamly account</CardDescription>
         </CardHeader>
 
         <form onSubmit={handleSubmit(onSubmit)}>

@@ -105,7 +105,7 @@ export default async function TouristDashboardPage() {
             <div className="rounded-xl border bg-background p-6 text-center text-sm text-muted-foreground">
               No upcoming bookings.{" "}
               <Link href="/companions" className="underline underline-offset-2">
-                Browse companions
+                Browse guides
               </Link>
             </div>
           ) : (
@@ -128,7 +128,7 @@ export default async function TouristDashboardPage() {
                       <div className="flex items-start justify-between gap-2">
                         <div className="space-y-0.5 min-w-0">
                           <p className="font-medium truncate">
-                            {comp?.profiles?.full_name ?? "Companion"}
+                            {comp?.profiles?.full_name ?? "Guide"}
                           </p>
                           {comp?.profiles?.city && (
                             <p className="flex items-center gap-1 text-xs text-muted-foreground">

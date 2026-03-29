@@ -64,7 +64,7 @@ export function ReviewSheet({
         <SheetHeader className="mb-4">
           <SheetTitle>Leave a review</SheetTitle>
           <SheetDescription>
-            How was your experience with {companionName ?? "your companion"}?
+            How was your experience with {companionName ?? "your guide"}?
           </SheetDescription>
         </SheetHeader>
 

@@ -42,7 +42,7 @@ export function TouristPastBookings({ bookings }: { bookings: PastBooking[] }) {
             <div className="flex items-start justify-between gap-2">
               <div className="space-y-0.5 min-w-0">
                 <p className="font-medium truncate">
-                  {b.companionName ?? "Companion"}
+                  {b.companionName ?? "Guide"}
                 </p>
                 {b.companionCity && (
                   <p className="flex items-center gap-1 text-xs text-muted-foreground">

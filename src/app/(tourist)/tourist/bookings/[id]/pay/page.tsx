@@ -50,8 +50,8 @@ export default async function PayPage({
         <div className="max-w-sm text-center space-y-2">
           <h1 className="text-lg font-semibold">Payment unavailable</h1>
           <p className="text-sm text-muted-foreground">
-            This companion hasn&apos;t connected their Stripe account yet. Please
-            contact support or try a different companion.
+            This guide hasn&apos;t connected their Stripe account yet. Please
+            contact support or try someone else.
           </p>
         </div>
       </div>
@@ -108,7 +108,7 @@ export default async function PayPage({
           <p className="font-medium text-base">Order summary</p>
           <Separator />
           {[
-            ["Companion", companionProfile?.full_name ?? "—"],
+            ["Guide", companionProfile?.full_name ?? "—"],
             ["Date", slot?.date ?? "—"],
             [
               "Time",

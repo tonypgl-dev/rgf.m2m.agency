@@ -99,7 +99,8 @@ begin
     hourly_rate,
     languages,
     activities,
-    verified
+    verified,
+    photos
   ) values (
     v_comp_row_id,
     v_companion_id,
@@ -117,14 +118,20 @@ If you want someone cheerful and performative, there are plenty of those. If you
     2,
     array['English', 'French', 'Aromanian'],
     array['City Tour', 'Dinner', 'Museum Visit'],
-    true
+    true,
+    array[
+      'https://randomuser.me/api/portraits/women/76.jpg',
+      'https://randomuser.me/api/portraits/women/77.jpg',
+      'https://randomuser.me/api/portraits/women/78.jpg'
+    ]
   )
   on conflict (id) do update set
-    bio        = excluded.bio,
+    bio         = excluded.bio,
     hourly_rate = excluded.hourly_rate,
-    languages  = excluded.languages,
-    activities = excluded.activities,
-    verified   = excluded.verified;
+    languages   = excluded.languages,
+    activities  = excluded.activities,
+    verified    = excluded.verified,
+    photos      = excluded.photos;
 
   -- ── 5. availability_slots — replace unbooked slots for next 3 days ────────
   delete from availability_slots

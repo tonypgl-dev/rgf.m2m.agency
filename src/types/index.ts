@@ -21,6 +21,7 @@ export interface Companion {
   verified: boolean;
   total_reviews: number;
   stripe_account_id: string | null;
+  photos: string[];
 }
 
 export interface AvailabilitySlot {

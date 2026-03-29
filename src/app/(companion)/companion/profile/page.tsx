@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { CompanionProfileForm } from "@/components/shared/companion-profile-form";
 import { StripeConnectButton } from "@/components/shared/stripe-connect-button";
+import { PhotoUploadSection } from "@/components/shared/photo-upload-section";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { Profile, Companion } from "@/types";
 
@@ -53,6 +54,14 @@ export default async function CompanionProfilePage({
         )}
 
         <CompanionProfileForm profile={profile} companion={companion} />
+
+        {/* Photos */}
+        {companion && (
+          <PhotoUploadSection
+            companionId={companion.id}
+            initialPhotos={companion.photos ?? []}
+          />
+        )}
 
         {/* Stripe Connect */}
         <Card>
