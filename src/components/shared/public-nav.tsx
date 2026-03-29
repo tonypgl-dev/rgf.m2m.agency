@@ -24,8 +24,8 @@ export async function PublicNav() {
   }
 
   return (
-    <header className="sticky top-0 z-40 bg-background/90 backdrop-blur-md border-b border-border/60">
-      <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+    <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-gray-100">
+      <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link
           href="/"
           className="inline-flex items-center gap-2 shrink-0"
@@ -33,14 +33,18 @@ export async function PublicNav() {
           <Image
             src="/logo.png"
             alt="Roamly"
-            width={36}
-            height={44}
-            className="h-9 w-auto object-contain"
+            width={54}
+            height={66}
+            className="h-14 w-auto object-contain"
+            style={{ background: 'transparent' }}
             priority
           />
           <span
-            className="font-semibold text-lg tracking-[2.5px]"
-            style={{ color: "#1F1F2E" }}
+            className="font-semibold text-lg tracking-[2.5px] transition-all"
+            style={{ 
+              color: "#1F1F2E",
+              filter: "drop-shadow(0 0 2px rgba(249, 115, 22, 0.45)) drop-shadow(0 0 8px rgba(166, 124, 255, 0.3))"
+            }}
           >
             Roamly
           </span>
