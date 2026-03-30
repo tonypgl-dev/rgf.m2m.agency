@@ -127,8 +127,8 @@ export default function LandingPage() {
               {/* Pulse dot sits over the period */}
               <span
                 aria-hidden
-                className="pointer-events-none absolute"
-                style={{ top: "calc(0.15em + 26px)", width: 8, height: 8, left: "50%", transform: "translateX(calc(-50% + 0.5px))" }}
+                className="pointer-events-none absolute top-[calc(0.15em+26px)] md:top-[calc(0.15em+41px)]"
+                style={{ width: 10, height: 10, left: "50%", transform: "translateX(calc(-50% + 0.5px))" }}
               >
                 <span
                   className="hero-pulse absolute inset-0 rounded-full"
