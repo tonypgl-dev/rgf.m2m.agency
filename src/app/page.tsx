@@ -113,6 +113,46 @@ export default function LandingPage() {
           opacity: 0.03,
         }} />
 
+        {/* Light mode overlays requested (do not affect dark mode) */}
+        {/* 1) Edge darkening vignette */}
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none z-[2] dark:hidden"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, transparent 30%, rgba(30, 15, 60, 0.45) 100%)",
+          }}
+        />
+        {/* 2) Orange glow — bottom center */}
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none z-[3] dark:hidden"
+          style={{
+            background:
+              "radial-gradient(ellipse 60% 40% at 50% 100%, rgba(249, 115, 22, 0.18) 0%, transparent 70%)",
+          }}
+        />
+        {/* 3) Violet glow — top corners */}
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none z-[3] dark:hidden"
+          style={{
+            background: [
+              "radial-gradient(ellipse 50% 35% at 0% 0%, rgba(124, 58, 237, 0.15) 0%, transparent 70%)",
+              "radial-gradient(ellipse 50% 35% at 100% 0%, rgba(124, 58, 237, 0.12) 0%, transparent 70%)",
+            ].join(", "),
+          }}
+        />
+        {/* 4) Bottom fade into light next section */}
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none z-[4] dark:hidden"
+          style={{
+            background:
+              "linear-gradient(to bottom, transparent 60%, rgba(244, 242, 249, 0.95) 100%)",
+          }}
+        />
+
         <div className="relative z-10 max-w-3xl mx-auto">
           <p className="text-[11px] font-semibold uppercase tracking-[0.25em] mb-8 text-[#1A0E3A]/40 dark:text-white/40">
             Roamly · Romania
