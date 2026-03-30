@@ -43,7 +43,8 @@ export default async function TouristDashboardPage() {
     .eq("id", user.id)
     .single();
 
-  if (!profile || profile.role !== "tourist") redirect("/login");
+  // Avoid /login -> /auto-login loops when profile is missing/misaligned.
+  if (!profile || profile.role !== "tourist") redirect("/");
 
   // Upcoming confirmed/pending bookings
   const { data: upcoming } = await supabase
