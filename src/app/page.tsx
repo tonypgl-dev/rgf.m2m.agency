@@ -190,8 +190,8 @@ export default function LandingPage() {
               className={cn(
                 "inline-flex items-center justify-center gap-2 rounded-lg",
                 "bg-accent-warm text-white font-semibold text-base",
-                "px-8 py-3 hover:bg-accent-warm/90 transition-colors",
-                "shadow-[0_4px_24px_rgba(251,146,60,0.45)]"
+                "px-8 py-3 hover:bg-accent-warm/90",
+                "btn-orange-glow"
               )}
             >
               Find a guide →

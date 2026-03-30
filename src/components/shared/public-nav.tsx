@@ -99,7 +99,8 @@ export async function PublicNav() {
               href={dashboardHref}
               className={cn(
                 buttonVariants({ variant: "outline", size: "sm" }),
-                "font-medium text-[var(--text-secondary)] hover:text-[var(--accent-violet)]"
+                "font-medium text-[var(--text-secondary)] hover:text-[var(--accent-violet)]",
+                "dark:[background-image:none] dark:bg-[var(--bg-elevated)] dark:text-[var(--accent-violet)] dark:border-[rgba(124,58,237,0.25)] dark:hover:border-[rgba(124,58,237,0.5)]"
               )}
             >
               Dashboard
@@ -109,7 +110,8 @@ export async function PublicNav() {
               href="/login"
               className={cn(
                 buttonVariants({ variant: "outline", size: "sm" }),
-                "font-medium text-[var(--text-secondary)] hover:text-[var(--accent-violet)]"
+                "font-medium text-[var(--text-secondary)] hover:text-[var(--accent-violet)]",
+                "dark:[background-image:none] dark:bg-[var(--bg-elevated)] dark:text-[var(--accent-violet)] dark:border-[rgba(124,58,237,0.25)] dark:hover:border-[rgba(124,58,237,0.5)]"
               )}
             >
               Log in

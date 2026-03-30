@@ -284,6 +284,18 @@
   animation: hero-pulse 2s ease-in-out infinite;
 }
 
+/* ── Hero CTA — orange glow button (dark mode) ─────────────── */
+.btn-orange-glow {
+  box-shadow: 0 4px 24px rgba(249,115,22,0.35);
+  transition: box-shadow 0.25s ease, background-color 0.2s ease;
+}
+.dark .btn-orange-glow {
+  box-shadow: 0 0 18px rgba(249,115,22,0.55), 0 4px 32px rgba(249,115,22,0.35);
+}
+.dark .btn-orange-glow:hover {
+  box-shadow: 0 0 32px rgba(249,115,22,0.80), 0 4px 48px rgba(249,115,22,0.50), 0 0 8px rgba(249,115,22,0.90);
+}
+
 /* ── Hide scrollbar (pill filter row) ──────────────────────── */
 .scrollbar-hide {
   scrollbar-width: none;
