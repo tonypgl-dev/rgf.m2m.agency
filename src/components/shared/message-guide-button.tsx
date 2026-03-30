@@ -38,7 +38,7 @@ export function MessageGuideButton({ companionId, guideName, isLoggedIn, redirec
       size="lg"
       onClick={handleClick}
       disabled={loading}
-      className="flex items-center gap-2"
+      className="flex items-center gap-2 dark:[background-image:none] dark:bg-[rgba(166,124,255,0.15)] dark:border-[rgba(166,124,255,0.35)] dark:text-[#A67CFF] dark:hover:bg-[rgba(166,124,255,0.25)]"
     >
       <MessageCircle className="h-4 w-4" />
       {loading ? "Opening…" : `Message ${guideName?.split(" ")[0] ?? "Guide"}`}
