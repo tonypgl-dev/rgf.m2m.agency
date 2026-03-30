@@ -1,8 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 // MOCK MODE: auth is handled server-side in createClient (server.ts).
-// This middleware is a passthrough — no auth redirects while mock is active.
-export async function middleware(request: NextRequest) {
+// Passthrough — no auth redirects while mock is active.
+export async function proxy(request: NextRequest) {
   return NextResponse.next({ request });
 }
 
