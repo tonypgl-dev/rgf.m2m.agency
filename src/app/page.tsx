@@ -41,7 +41,7 @@ const TRUST = [
 export default function LandingPage() {
   return (
     <div className="min-h-screen flex flex-col">
-      <PublicNav dark />
+      <PublicNav />
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section
@@ -116,7 +116,7 @@ export default function LandingPage() {
         />
 
         <div className="relative z-10 max-w-3xl mx-auto">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[var(--text-muted)] mb-8">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/40 mb-8">
             Roamly · Romania
           </p>
 
@@ -148,7 +148,7 @@ export default function LandingPage() {
             </span>
           </h1>
 
-          <p className="mt-7 text-base sm:text-lg text-[var(--text-secondary)] max-w-lg mx-auto leading-relaxed">
+          <p className="mt-7 text-base sm:text-lg text-white/60 max-w-lg mx-auto leading-relaxed">
             Book a verified local for dinner, city tours, hiking, or a night out. Real
             people. Real experiences.
           </p>
@@ -158,7 +158,7 @@ export default function LandingPage() {
               href="/companions"
               className={cn(
                 "inline-flex items-center justify-center gap-2 rounded-lg",
-                "bg-accent-warm text-[var(--text-primary)] font-semibold text-base",
+                "bg-accent-warm text-white font-semibold text-base",
                 "px-8 py-3 hover:bg-accent-warm/90 transition-colors",
                 "shadow-[0_4px_24px_rgba(251,146,60,0.45)]"
               )}
@@ -169,7 +169,7 @@ export default function LandingPage() {
               href="#how-it-works"
               className={cn(
                 "inline-flex items-center justify-center rounded-lg",
-                "border border-border text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent-violet)]",
+                "border border-white/20 text-white/70 hover:text-white hover:border-white/40",
                 "font-medium text-sm px-7 py-3 transition-colors"
               )}
             >

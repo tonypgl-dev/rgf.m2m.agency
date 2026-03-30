@@ -5,7 +5,7 @@ import { buttonVariants } from "@/lib/button-variants";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
 
-export async function PublicNav({ dark = false }: { dark?: boolean } = {}) {
+export async function PublicNav() {
   const supabase = await createClient();
   const {
     data: { user },
@@ -26,11 +26,11 @@ export async function PublicNav({ dark = false }: { dark?: boolean } = {}) {
 
   return (
     <header
-        className={cn("sticky top-0 z-40 backdrop-blur-[16px] border-b border-border bg-[var(--bg-surface)]")}
-        style={dark ? {
-          backgroundColor: "var(--bg-surface)",
-          borderBottom: "1px solid var(--border)",
-        } : undefined}
+        className={cn(
+          "sticky top-0 z-40 backdrop-blur-[20px] border-b",
+          "bg-[rgba(255,255,255,0.75)] border-[rgba(120,100,180,0.10)] shadow-[0_1px_24px_rgba(120,100,180,0.08)]",
+          "dark:bg-[var(--bg-surface)] dark:border-border dark:shadow-none"
+        )}
       >
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link
@@ -89,7 +89,7 @@ export async function PublicNav({ dark = false }: { dark?: boolean } = {}) {
             href="/companions"
             className={cn(
               buttonVariants({ variant: "ghost", size: "sm" }),
-              "font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+              "font-medium text-[var(--text-secondary)] hover:text-[var(--accent-violet)]"
             )}
           >
             Guides
@@ -99,7 +99,7 @@ export async function PublicNav({ dark = false }: { dark?: boolean } = {}) {
               href={dashboardHref}
               className={cn(
                 buttonVariants({ variant: "outline", size: "sm" }),
-                "font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+                "font-medium text-[var(--text-secondary)] hover:text-[var(--accent-violet)]"
               )}
             >
               Dashboard
@@ -109,7 +109,7 @@ export async function PublicNav({ dark = false }: { dark?: boolean } = {}) {
               href="/login"
               className={cn(
                 buttonVariants({ variant: "outline", size: "sm" }),
-                "font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+                "font-medium text-[var(--text-secondary)] hover:text-[var(--accent-violet)]"
               )}
             >
               Log in

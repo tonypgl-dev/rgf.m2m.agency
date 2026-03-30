@@ -237,7 +237,7 @@ export function CompanionsFilters({ initial }: { initial: { city: string, langua
       className={cn(
         "h-8 rounded-lg px-4 text-sm font-medium border whitespace-nowrap transition-all flex items-center gap-1.5 shrink-0",
         active
-          ? "bg-foreground text-background border-foreground"
+          ? "bg-[linear-gradient(135deg,#7C3AED,#6D28D9)] text-white border-transparent shadow-[0_4px_12px_rgba(124,58,237,0.30)]"
           : "bg-background border-border text-foreground/70 hover:border-foreground/40"
       )}
     >
@@ -376,7 +376,7 @@ export function CompanionsFilters({ initial }: { initial: { city: string, langua
             className={cn(
               "h-8 rounded-lg px-4 text-sm font-medium border whitespace-nowrap transition-all flex items-center gap-1.5 shrink-0",
               activeCount > 0
-                ? "bg-foreground text-background border-foreground"
+                ? "bg-[linear-gradient(135deg,#7C3AED,#6D28D9)] text-white border-transparent shadow-[0_4px_12px_rgba(124,58,237,0.30)]"
                 : "bg-background border-border text-foreground/70 hover:border-foreground/40"
             )}
           >

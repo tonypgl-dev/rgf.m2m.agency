@@ -62,8 +62,9 @@ export function SplashScreen() {
             inset: 0,
             width: "100vw",
             height: "100vh",
-            objectFit: "cover",
+            objectFit: "contain",
             objectPosition: "center",
+            backgroundColor: "#0D0A1A",
           }}
         />
       )}

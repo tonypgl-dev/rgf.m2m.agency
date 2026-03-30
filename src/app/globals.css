@@ -50,19 +50,18 @@
 }
 
 :root {
-  --bg-base: #0d0a1a;
-  --bg-surface: #13101f;
-  --bg-elevated: #1a1628;
-  --border: rgba(255, 255, 255, 0.07);
-
-  --accent-orange: #f97316;
+  --bg-base: #F4F2F9;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #EDE9F8;
+  --border: rgba(120, 100, 180, 0.15);
+  --text-primary: #1A1028;
+  --text-secondary: #4A3F6B;
+  --text-muted: #8B7FB0;
+  --accent-orange: #F97316;
   --accent-orange-glow: rgba(249, 115, 22, 0.25);
-  --accent-violet: #a67cff;
+  --accent-violet: #7C3AED;
   --accent-violet-glow: rgba(166, 124, 255, 0.2);
-
-  --text-primary: #f5f0ff;
-  --text-secondary: #9b8fbf;
-  --text-muted: #5c5478;
+  --shadow-card: 0 4px 32px rgba(80, 60, 140, 0.10);
 
   --background: var(--bg-base);
   --foreground: var(--text-primary);
@@ -72,7 +71,7 @@
   --popover-foreground: var(--text-primary);
   --primary: var(--accent-orange);
   --primary-foreground: #ffffff;
-  --secondary: transparent;
+  --secondary: var(--bg-elevated);
   --secondary-foreground: var(--text-primary);
   --muted: var(--bg-elevated);
   --muted-foreground: var(--text-secondary);
@@ -100,7 +99,46 @@
   --sidebar-ring:             oklch(0.70 0.20 303);
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-base: #0D0A1A;
+    --bg-surface: #13101F;
+    --bg-elevated: #1A1628;
+    --border: rgba(255, 255, 255, 0.07);
+    --text-primary: #F5F0FF;
+    --text-secondary: #9B8FBF;
+    --text-muted: #5C5478;
+    --accent-orange: #F97316;
+    --accent-orange-glow: rgba(249, 115, 22, 0.25);
+    --accent-violet: #A67CFF;
+    --accent-violet-glow: rgba(166, 124, 255, 0.2);
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.30);
+  }
+}
+
+.light {
+  --bg-base: #F4F2F9;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #EDE9F8;
+  --border: rgba(120, 100, 180, 0.15);
+  --text-primary: #1A1028;
+  --text-secondary: #4A3F6B;
+  --text-muted: #8B7FB0;
+  --accent-violet: #7C3AED;
+  --shadow-card: 0 4px 32px rgba(80, 60, 140, 0.10);
+}
+
 .dark {
+  --bg-base: #0D0A1A;
+  --bg-surface: #13101F;
+  --bg-elevated: #1A1628;
+  --border: rgba(255, 255, 255, 0.07);
+  --text-primary: #F5F0FF;
+  --text-secondary: #9B8FBF;
+  --text-muted: #5C5478;
+  --accent-violet: #A67CFF;
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.30);
+
   --background: var(--bg-base);
   --foreground: var(--text-primary);
   --card: var(--bg-surface);
@@ -117,7 +155,6 @@
   --accent-foreground: var(--text-primary);
   --accent-warm: var(--accent-orange);
   --destructive: #ef4444;
-  --border: rgba(255, 255, 255, 0.07);
   --input: var(--border);
   --ring: var(--accent-violet);
   --chart-1: oklch(0.87 0 0);

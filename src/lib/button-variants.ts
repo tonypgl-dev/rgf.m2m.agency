@@ -6,11 +6,11 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "text-primary-foreground bg-[linear-gradient(135deg,#F97316,#EA580C)] hover:shadow-[0_0_20px_var(--accent-orange-glow)]",
+          "text-primary-foreground bg-[linear-gradient(135deg,#F97316_0%,#EA580C_100%)] shadow-[0_4px_16px_rgba(249,115,22,0.30),inset_0_1px_0_rgba(255,255,255,0.25)] hover:shadow-[0_0_20px_var(--accent-orange-glow)]",
         outline:
-          "border-border bg-transparent text-foreground hover:bg-muted aria-expanded:bg-muted dark:border-input dark:bg-transparent dark:hover:bg-input/50",
+          "border border-[rgba(120,100,180,0.18)] bg-[linear-gradient(135deg,#FFFFFF_0%,#F0ECF9_100%)] shadow-[0_2px_8px_rgba(120,100,180,0.10),inset_0_1px_0_rgba(255,255,255,0.95)] text-[var(--text-primary)] hover:bg-muted aria-expanded:bg-muted dark:border-input dark:bg-transparent dark:shadow-none dark:text-foreground dark:hover:bg-input/50",
         secondary:
-          "border-border bg-transparent text-foreground hover:bg-muted aria-expanded:bg-muted aria-expanded:text-foreground",
+          "border border-[rgba(120,100,180,0.18)] bg-[linear-gradient(135deg,#FFFFFF_0%,#F0ECF9_100%)] shadow-[0_2px_8px_rgba(120,100,180,0.10),inset_0_1px_0_rgba(255,255,255,0.95)] text-[var(--text-primary)] hover:bg-muted aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-transparent dark:shadow-none dark:text-foreground",
         ghost:
           "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
         destructive:

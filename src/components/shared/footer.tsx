@@ -5,7 +5,7 @@ const linkClass = "text-sm text-[var(--text-muted)] transition-colors hover:text
 
 export function Footer() {
   return (
-    <footer className="bg-[var(--bg-base)] text-[var(--text-muted)] px-6 py-12 mt-auto">
+    <footer className="bg-[#EDE9F8] dark:bg-[var(--bg-base)] border-t border-[rgba(120,100,180,0.12)] dark:border-border text-[var(--text-muted)] px-6 py-12 mt-auto">
       <div className="max-w-6xl mx-auto">
         <Link
           href="/"
@@ -16,7 +16,7 @@ export function Footer() {
             alt="Roamly"
             width={36}
             height={44}
-            className="h-9 w-auto object-contain"
+            className="h-9 w-auto object-contain [filter:brightness(0.15)_saturate(2)] dark:[filter:none]"
           />
         </Link>
 
