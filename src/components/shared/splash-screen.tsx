@@ -26,7 +26,7 @@ export function SplashScreen() {
     >
       {/* Portrait — mobil */}
       <div className="absolute inset-0 block md:hidden">
-        <Image src="/og-portrait.png" fill className="object-cover" priority alt="Roamly" />
+        <Image src="/openg.png" fill className="object-cover" priority alt="Roamly" />
       </div>
       {/* Landscape — desktop */}
       <div className="absolute inset-0 hidden md:block">
