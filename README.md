@@ -17,7 +17,9 @@ npm run dev
 
 | File | Content |
 |---|---|
+| `deploy.md` | Deploy flow, Vercel setup, Next.js 16 proxy conventions |
 | `brand-identity.md` | Brand name, taglines, positioning, tone of voice |
+| `gemini-claude.md` | PM log — strategic decisions, features in progress |
 | `docs/strategy.md` | Marketing strategy, ideas, future features |
 | `docs/marketing-context.md` | Context for marketing/business discussions |
 | `docs/agent-upload-photos.md` | Pending task: upload Poze/ to Supabase Storage |
