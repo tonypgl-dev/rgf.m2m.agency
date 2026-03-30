@@ -1,37 +1,72 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
+
+type Phase = "loading" | "splash" | "done";
 
 export function SplashScreen() {
-  const [visible, setVisible] = useState(true);
-  const [mounted, setMounted] = useState(true);
+  const [phase, setPhase] = useState<Phase>("loading");
+  const [src, setSrc] = useState("");
 
   useEffect(() => {
-    const fadeTimer = setTimeout(() => setVisible(false), 2500);
-    const unmountTimer = setTimeout(() => setMounted(false), 3200);
-    return () => {
-      clearTimeout(fadeTimer);
-      clearTimeout(unmountTimer);
+    const isMobile = window.innerWidth < 768;
+    const imgSrc = isMobile ? "/openg.png" : "/og-landscape.png";
+    setSrc(imgSrc);
+
+    const img = new window.Image();
+
+    img.onload = () => {
+      setPhase("splash");
+      setTimeout(() => setPhase("done"), 4000);
     };
+
+    img.onerror = () => setPhase("done");
+
+    img.src = imgSrc;
+
+    // Fallback: dacă imaginea durează prea mult, continuăm oricum
+    const maxTimer = setTimeout(() => setPhase("done"), 12000);
+
+    return () => clearTimeout(maxTimer);
   }, []);
 
-  if (!mounted) return null;
+  if (phase === "done") return null;
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] transition-opacity duration-700 ${
-        visible ? "opacity-100" : "opacity-0"
-      }`}
+      className="fixed inset-0 z-[9999] flex items-center justify-center"
+      style={{ backgroundColor: "#0D0A1A" }}
     >
-      {/* Portrait — mobil */}
-      <div className="absolute inset-0 block md:hidden">
-        <Image src="/openg.png" fill className="object-cover" priority alt="Roamly" />
-      </div>
-      {/* Landscape — desktop */}
-      <div className="absolute inset-0 hidden md:block">
-        <Image src="/og-landscape.png" fill className="object-cover" priority alt="Roamly" />
-      </div>
+      {/* Loading spinner — afișat cât timp imaginea se preîncarcă */}
+      {phase === "loading" && (
+        <div
+          style={{
+            width: 36,
+            height: 36,
+            borderRadius: "50%",
+            border: "3px solid rgba(249,115,22,0.2)",
+            borderTopColor: "#F97316",
+            animation: "splash-spin 0.8s linear infinite",
+          }}
+        />
+      )}
+
+      {/* Imaginea splash — afișată după preîncărcare, acoperă exact ecranul */}
+      {phase === "splash" && src && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={src}
+          alt="Roamly"
+          style={{
+            position: "fixed",
+            inset: 0,
+            width: "100vw",
+            height: "100vh",
+            objectFit: "cover",
+            objectPosition: "center",
+          }}
+        />
+      )}
     </div>
   );
 }

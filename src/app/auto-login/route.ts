@@ -14,7 +14,12 @@ export async function GET(req: NextRequest) {
   const cred = credentials[role] ?? credentials.tourist;
 
   const supabase = await createClient();
-  await supabase.auth.signInWithPassword({ email: cred.email, password: cred.password });
+  const { error } = await supabase.auth.signInWithPassword({ email: cred.email, password: cred.password });
+
+  // If login fails (e.g. test account doesn't exist on production), go home instead of looping
+  if (error) {
+    return NextResponse.redirect(new URL("/", req.url));
+  }
 
   return NextResponse.redirect(new URL(cred.redirect, req.url));
 }

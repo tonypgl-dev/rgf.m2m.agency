@@ -179,6 +179,11 @@
   }
 }
 
+/* ── Splash screen spinner ──────────────────────────────────── */
+@keyframes splash-spin {
+  to { transform: rotate(360deg); }
+}
+
 /* ── Shimmer skeleton animation ────────────────────────────── */
 @keyframes shimmer {
   0%   { background-position: -200% 0; }
