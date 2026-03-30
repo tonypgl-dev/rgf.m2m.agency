@@ -41,6 +41,30 @@ export default async function CompanionProfilePage({
           </p>
         </div>
 
+        {/* Profile approval status */}
+        {companion && companion.status === "pending" && (
+          <div className="rounded-lg bg-yellow-50 border border-yellow-200 p-4 text-sm text-yellow-800">
+            <p className="font-medium">Profile under review</p>
+            <p className="mt-0.5 text-yellow-700">
+              Your profile is being reviewed by our team. You'll be visible to tourists once approved — usually within 24 hours.
+            </p>
+          </div>
+        )}
+        {companion && companion.status === "rejected" && (
+          <div className="rounded-lg bg-red-50 border border-red-200 p-4 text-sm text-red-800">
+            <p className="font-medium">Profile not approved</p>
+            <p className="mt-0.5 text-red-700">
+              Your profile didn't meet our quality standards. Please update your photos and bio, then contact support.
+            </p>
+          </div>
+        )}
+        {companion && companion.status === "approved" && (
+          <div className="rounded-lg bg-green-50 border border-green-200 p-4 text-sm text-green-700">
+            <p className="font-medium">Profile approved — you're live!</p>
+            <p className="mt-0.5">Tourists can find and book you on Roamly.</p>
+          </div>
+        )}
+
         {/* Stripe status messages */}
         {stripe === "success" && (
           <div className="rounded-lg bg-green-50 border border-green-200 p-4 text-sm text-green-700">

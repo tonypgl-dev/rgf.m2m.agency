@@ -28,7 +28,7 @@ export function BottomNav({ role }: { role: "tourist" | "companion" }) {
   const tabs = role === "tourist" ? TOURIST_TABS : COMPANION_TABS;
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t border-border">
       <div className="flex">
         {tabs.map(({ href, label, icon: Icon }) => {
           const active = pathname === href || pathname.startsWith(href + "/");

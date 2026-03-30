@@ -7,8 +7,12 @@ export interface Profile {
   avatar_url: string | null;
   phone: string | null;
   city: string | null;
+  referral_code: string | null;
+  referred_by: string | null;
   created_at: string;
 }
+
+export type CompanionStatus = "pending" | "approved" | "rejected";
 
 export interface Companion {
   id: string;
@@ -19,6 +23,7 @@ export interface Companion {
   activities: string[];
   rating_avg: number;
   verified: boolean;
+  status: CompanionStatus;
   total_reviews: number;
   stripe_account_id: string | null;
   photos: string[];

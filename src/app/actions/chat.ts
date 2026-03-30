@@ -4,6 +4,36 @@ import { createClient } from "@/lib/supabase/server";
 
 type ActionResult = { error?: string };
 
+export async function createOrGetConversationAction(
+  companionId: string
+): Promise<{ conversationId?: string; error?: string }> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { error: "Not authenticated" };
+
+  // Try to find existing conversation
+  const { data: existing } = await supabase
+    .from("conversations")
+    .select("id")
+    .eq("tourist_id", user.id)
+    .eq("companion_id", companionId)
+    .maybeSingle();
+
+  if (existing) return { conversationId: existing.id };
+
+  // Create new
+  const { data: created, error } = await supabase
+    .from("conversations")
+    .insert({ tourist_id: user.id, companion_id: companionId })
+    .select("id")
+    .single();
+
+  if (error) return { error: error.message };
+  return { conversationId: created.id };
+}
+
 export async function checkInAction(bookingId: string): Promise<ActionResult> {
   const supabase = await createClient();
   const {

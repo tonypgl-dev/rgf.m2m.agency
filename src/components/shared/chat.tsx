@@ -202,7 +202,7 @@ export function Chat({
             <button
               onClick={handleMarkComplete}
               disabled={actionPending === "complete"}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-600 text-white text-xs font-medium hover:bg-green-700 disabled:opacity-50 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-600 text-white text-xs font-medium hover:bg-green-700 disabled:opacity-50 transition-colors"
             >
               <CheckCircle className="h-3.5 w-3.5" />
               {actionPending === "complete" ? "Saving…" : "Mark as Complete"}
@@ -308,7 +308,7 @@ function ActionPill({
       onClick={onClick}
       disabled={disabled || loading}
       className={[
-        "flex items-center gap-1 px-3 py-1.5 rounded-full border text-xs font-medium transition-colors",
+        "flex items-center gap-1 px-3 py-1.5 rounded-lg border text-xs font-medium transition-colors",
         done
           ? "bg-green-50 border-green-200 text-green-700"
           : disabled

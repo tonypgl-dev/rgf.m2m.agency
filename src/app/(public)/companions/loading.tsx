@@ -11,7 +11,7 @@ export default function CompanionsLoading() {
       </div>
 
       {/* Filter bar skeleton */}
-      <div className="h-[45px] bg-white border-b border-border/60 flex items-center px-4 gap-2">
+      <div className="h-[45px] bg-background border-b border-border/60 flex items-center px-4 gap-2">
         {[64, 80, 60, 72, 68, 80].map((w, i) => (
           <div
             key={i}

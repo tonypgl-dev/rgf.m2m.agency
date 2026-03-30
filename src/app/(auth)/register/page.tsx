@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -25,7 +26,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-export default function RegisterPage() {
+function RegisterForm() {
+  const searchParams = useSearchParams();
+  const refCode = searchParams.get("ref") ?? undefined;
+
   const [step, setStep] = useState<1 | 2>(1);
   const [step1Data, setStep1Data] = useState<RegisterStep1Input | null>(null);
   const [serverError, setServerError] = useState<string | null>(null);
@@ -62,6 +66,7 @@ export default function RegisterPage() {
       hourly_rate: data.hourly_rate,
       languages: data.languages,
       activities: data.activities,
+      referred_by: refCode,
     });
 
     if (result?.error) setServerError(result.error);
@@ -292,5 +297,13 @@ export default function RegisterPage() {
         )}
       </Card>
     </div>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense>
+      <RegisterForm />
+    </Suspense>
   );
 }

@@ -20,7 +20,7 @@ export default async function CompanionsPage({
       id, profile_id, hourly_rate, languages, activities, rating_avg, total_reviews, verified, photos,
       profiles!inner(full_name, avatar_url, city)
     `)
-    .eq("verified", true)
+    .eq("status", "approved")
     .order("rating_avg", { ascending: false });
 
   if (city     && typeof city     === "string") query = query.eq("profiles.city", city);
@@ -70,17 +70,19 @@ export default async function CompanionsPage({
   return (
     <div>
       {/* ── Page heading ── */}
-      <div className="px-4 pt-6 pb-2">
-        <h1 className="text-2xl font-bold tracking-tight">
-          Find your local guide
+      <div className="px-4 pt-5 pb-2">
+        <h1 className="text-xl font-semibold tracking-tight">
+          Guides in {typeof city === "string" && city ? city : "Bucharest"}
         </h1>
-        <p className="text-sm text-muted-foreground mt-1">
-          {cards.length} verified local{cards.length === 1 ? " guide" : " guides"} available
-        </p>
+        {cards.length > 0 && (
+          <p className="text-xs text-muted-foreground mt-0.5">
+            {cards.length} available
+          </p>
+        )}
       </div>
 
       {/* ── Filter bar: sticky below nav (h-14 = 56px = top-14) ── */}
-      <div className="sticky top-14 z-30 bg-white border-b border-border/60">
+      <div className="sticky top-14 z-30 bg-background border-b border-border/60">
         <CompanionsFilters initial={filterValues} />
       </div>
 

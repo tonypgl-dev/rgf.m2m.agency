@@ -5,7 +5,7 @@ export function RoamlyBadge({ className }: { className?: string }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs text-white",
+        "inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs text-white",
         "bg-[#1F1F2E] shadow-sm",
         className
       )}

@@ -137,7 +137,7 @@ export function PhotoUploadSection({ companionId, initialPhotos }: Props) {
 
                 {/* Cover label */}
                 {i === 0 && (
-                  <span className="absolute bottom-1 left-1/2 -translate-x-1/2 rounded-full bg-black/60 px-2 py-0.5 text-[10px] font-semibold text-white whitespace-nowrap">
+                  <span className="absolute bottom-1 left-1/2 -translate-x-1/2 rounded-lg bg-black/60 px-2 py-0.5 text-[10px] font-semibold text-white whitespace-nowrap">
                     Cover
                   </span>
                 )}
@@ -146,7 +146,7 @@ export function PhotoUploadSection({ companionId, initialPhotos }: Props) {
                 <button
                   type="button"
                   onClick={() => removePhoto(i)}
-                  className="absolute top-1 right-1 h-6 w-6 rounded-full bg-black/60 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="absolute top-1 right-1 h-6 w-6 rounded-lg bg-black/60 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity"
                   aria-label="Remove photo"
                 >
                   <X className="h-3.5 w-3.5" />

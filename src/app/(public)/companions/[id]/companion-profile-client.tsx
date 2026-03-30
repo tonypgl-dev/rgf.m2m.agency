@@ -31,6 +31,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createBookingAction } from "@/app/actions/bookings";
 import { RoamlyBadge } from "@/components/shared/roamly-badge";
+import { MessageGuideButton } from "@/components/shared/message-guide-button";
 import type { Companion, Profile, AvailabilitySlot } from "@/types";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -78,7 +79,7 @@ function ProfilePhotoGallery({ photos, name }: { photos: string[]; name: string 
           <button
             type="button"
             onClick={prev}
-            className="absolute left-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/60 transition-colors z-10"
+            className="absolute left-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-lg bg-black/40 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/60 transition-colors z-10"
             aria-label="Previous photo"
           >
             <ChevronLeft className="h-4 w-4" />
@@ -86,7 +87,7 @@ function ProfilePhotoGallery({ photos, name }: { photos: string[]; name: string 
           <button
             type="button"
             onClick={next}
-            className="absolute right-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/60 transition-colors z-10"
+            className="absolute right-3 top-1/2 -translate-y-1/2 h-8 w-8 rounded-lg bg-black/40 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/60 transition-colors z-10"
             aria-label="Next photo"
           >
             <ChevronRight className="h-4 w-4" />
@@ -409,10 +410,18 @@ export function CompanionProfileClient({ companion, slots, isLoggedIn }: Props) 
             )}
           </div>
 
-          {/* Desktop */}
-          <Button size="lg" onClick={openSheet} className="hidden md:flex flex-shrink-0">
-            Book a Guide
-          </Button>
+          {/* Desktop CTAs */}
+          <div className="hidden md:flex flex-col gap-2 flex-shrink-0">
+            <Button size="lg" onClick={openSheet}>
+              Book a Guide
+            </Button>
+            <MessageGuideButton
+              companionId={companion.id}
+              guideName={profile.full_name}
+              isLoggedIn={isLoggedIn}
+              redirectPath={`/companions/${companion.id}`}
+            />
+          </div>
         </div>
 
         <Separator />
@@ -513,13 +522,13 @@ export function CompanionProfileClient({ companion, slots, isLoggedIn }: Props) 
 
       {/* ───────────────────── Mobile sticky bar ───────────────────── */}
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/95 backdrop-blur border-t md:hidden z-40">
-        <div className="flex items-center gap-4 max-w-3xl mx-auto">
-          {companion.hourly_rate != null && (
-            <div className="flex-shrink-0">
-              <span className="font-semibold text-lg">${companion.hourly_rate}</span>
-              <span className="text-sm text-muted-foreground"> / hr</span>
-            </div>
-          )}
+        <div className="flex items-center gap-2 max-w-3xl mx-auto">
+          <MessageGuideButton
+            companionId={companion.id}
+            guideName={profile.full_name}
+            isLoggedIn={isLoggedIn}
+            redirectPath={`/companions/${companion.id}`}
+          />
           <Button size="lg" onClick={openSheet} className="flex-1">
             Book a Guide
           </Button>

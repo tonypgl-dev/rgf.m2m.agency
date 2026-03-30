@@ -235,10 +235,10 @@ export function CompanionsFilters({ initial }: { initial: { city: string, langua
       type="button"
       onClick={onClick}
       className={cn(
-        "h-9 rounded-full px-4 text-sm font-medium border whitespace-nowrap transition-all flex items-center gap-1.5 shrink-0",
+        "h-8 rounded-lg px-4 text-sm font-medium border whitespace-nowrap transition-all flex items-center gap-1.5 shrink-0",
         active
-          ? "bg-gray-900 text-white border-gray-900"
-          : "bg-white border-gray-200 text-gray-700 hover:border-gray-300"
+          ? "bg-foreground text-background border-foreground"
+          : "bg-background border-border text-foreground/70 hover:border-foreground/40"
       )}
     >
       {label}
@@ -264,33 +264,33 @@ export function CompanionsFilters({ initial }: { initial: { city: string, langua
     onSelect: (val: string) => void;
     allLabel: string;
   }) => (
-    <div className="absolute top-[calc(100%+8px)] left-0 z-50 bg-white rounded-xl shadow-lg border border-gray-100 py-1.5 min-w-[160px] animate-in fade-in zoom-in-95 duration-100">
+    <div className="absolute top-[calc(100%+8px)] left-0 z-50 bg-popover rounded-xl shadow-lg border border-border py-1.5 min-w-[160px] animate-in fade-in zoom-in-95 duration-100">
       <button
         onClick={() => onSelect("")}
-        className="w-full h-9 px-3 flex items-center justify-between text-sm hover:bg-gray-50 transition-colors"
+        className="w-full h-8 px-3 flex items-center justify-between text-sm hover:bg-muted transition-colors"
       >
-        <span className={cn(!currentValue && "font-semibold text-gray-900")}>
+        <span className={cn(!currentValue && "font-semibold text-foreground")}>
           {allLabel}
         </span>
-        {!currentValue && <Check className="h-4 w-4 text-gray-900" />}
+        {!currentValue && <Check className="h-4 w-4 text-foreground" />}
       </button>
       {options.map((opt) => (
         <button
           key={opt}
           onClick={() => onSelect(opt)}
-          className="w-full h-9 px-3 flex items-center justify-between text-sm hover:bg-gray-50 transition-colors"
+          className="w-full h-8 px-3 flex items-center justify-between text-sm hover:bg-muted transition-colors"
         >
-          <span className={cn(currentValue === opt && "font-semibold text-gray-900")}>
+          <span className={cn(currentValue === opt && "font-semibold text-foreground")}>
             {opt}
           </span>
-          {currentValue === opt && <Check className="h-4 w-4 text-gray-900" />}
+          {currentValue === opt && <Check className="h-4 w-4 text-foreground" />}
         </button>
       ))}
     </div>
   );
 
   return (
-    <div className="sticky top-14 z-40 bg-white/95 backdrop-blur border-b border-gray-100 py-3">
+    <div className="sticky top-14 z-40 bg-background/95 backdrop-blur border-b border-border py-3">
       {/* ── Pill filter row ── */}
       <div className="overflow-x-auto scrollbar-hide no-scrollbar" ref={containerRef}>
         <div className="flex gap-2 px-4 w-max">
@@ -374,16 +374,16 @@ export function CompanionsFilters({ initial }: { initial: { city: string, langua
               setSheetOpen(true);
             }}
             className={cn(
-              "h-9 rounded-full px-4 text-sm font-medium border whitespace-nowrap transition-all flex items-center gap-1.5 shrink-0",
+              "h-8 rounded-lg px-4 text-sm font-medium border whitespace-nowrap transition-all flex items-center gap-1.5 shrink-0",
               activeCount > 0
-                ? "bg-gray-900 text-white border-gray-900"
-                : "bg-white border-gray-200 text-gray-700 hover:border-gray-300"
+                ? "bg-foreground text-background border-foreground"
+                : "bg-background border-border text-foreground/70 hover:border-foreground/40"
             )}
           >
             <SlidersHorizontal className="h-3.5 w-3.5" />
             Filters
             {activeCount > 0 && (
-              <span className="rounded-full bg-white text-gray-900 text-[10px] h-4 w-4 flex items-center justify-center font-bold">
+              <span className="rounded-lg bg-background text-foreground text-[10px] h-4 w-4 flex items-center justify-center font-bold">
                 {activeCount}
               </span>
             )}

@@ -54,6 +54,7 @@ export async function registerAction(data: {
   hourly_rate?: string;
   languages?: string[];
   activities?: string[];
+  referred_by?: string;
 }): Promise<ActionError> {
   const supabase = await createClient();
   const service = createServiceClient();
@@ -75,6 +76,7 @@ export async function registerAction(data: {
     full_name: data.full_name || null,
     phone: data.phone || null,
     city: data.city || null,
+    referred_by: data.referred_by || null,
   });
 
   if (profileError) return { error: profileError.message };

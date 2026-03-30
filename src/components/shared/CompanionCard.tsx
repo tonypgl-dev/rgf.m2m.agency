@@ -89,7 +89,7 @@ export function CompanionCard({
         <div className="absolute top-0 left-1/2 -translate-x-1/2 z-10 pointer-events-none">
           <span
             className={cn(
-              "inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full",
+              "inline-flex items-center gap-1.5 px-3.5 py-1 rounded-lg",
               "bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400",
               "text-amber-900 text-[11px] font-extrabold tracking-wide uppercase",
               "shadow-[0_2px_12px_rgba(251,191,36,0.7)] ring-1 ring-amber-300/60",
@@ -104,7 +104,7 @@ export function CompanionCard({
       {/* ── Card shell (not a link — photos intercept clicks) ── */}
       <div
         className={cn(
-          "rounded-2xl overflow-hidden bg-white transition-all duration-200",
+          "rounded-2xl overflow-hidden bg-card transition-all duration-200",
           "shadow-[0_4px_16px_rgba(0,0,0,0.10)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.16)]",
           featured &&
             "ring-2 ring-amber-400 shadow-[0_4px_24px_rgba(251,191,36,0.28)] hover:shadow-[0_8px_36px_rgba(251,191,36,0.40)]"
@@ -184,7 +184,7 @@ export function CompanionCard({
 
           {/* Top-right: rating pill */}
           <div className="absolute top-3 right-3 z-20">
-            <span className="inline-flex items-center gap-1 rounded-full bg-white px-2.5 py-1 shadow-sm">
+            <span className="inline-flex items-center gap-1 rounded-lg bg-white px-2.5 py-1 shadow-sm">
               <Star className="h-3 w-3 fill-amber-400 stroke-amber-400" />
               <span className="text-[12px] font-semibold text-gray-900 tabular-nums">
                 {c.totalReviews > 0 ? Number(c.ratingAvg).toFixed(1) : "New"}
@@ -195,7 +195,7 @@ export function CompanionCard({
           {/* Top-left: verified + Roamly license (verified guides only) */}
           {c.verified && (
             <div className="absolute top-3 left-3 z-20 flex flex-col gap-1.5 items-start max-w-[min(100%,220px)]">
-              <span className="inline-flex items-center gap-1 rounded-full bg-white/20 backdrop-blur-sm px-2.5 py-1">
+              <span className="inline-flex items-center gap-1 rounded-lg bg-white/20 backdrop-blur-sm px-2.5 py-1">
                 <CheckCircle className="h-3 w-3 text-accent shrink-0" strokeWidth={2.5} />
                 <span className="text-[11px] font-medium text-white">Verified</span>
               </span>
@@ -239,7 +239,7 @@ export function CompanionCard({
                 const { bg, color } = langStyle(firstLang);
                 return (
                   <span
-                    className="inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-medium whitespace-nowrap shrink-0"
+                    className="inline-flex items-center rounded-lg px-2 py-0.5 text-[11px] font-medium whitespace-nowrap shrink-0"
                     style={{ backgroundColor: bg, color }}
                   >
                     {firstLang}
@@ -247,12 +247,12 @@ export function CompanionCard({
                 );
               })()}
               {firstAct && (
-                <span className="inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-medium whitespace-nowrap shrink-0 bg-gray-100 text-gray-700">
+                <span className="inline-flex items-center rounded-lg px-2 py-0.5 text-[11px] font-medium whitespace-nowrap shrink-0 bg-muted text-muted-foreground">
                   {firstAct}
                 </span>
               )}
               {extraCount > 0 && (
-                <span className="inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-medium whitespace-nowrap shrink-0 bg-gray-100 text-gray-500">
+                <span className="inline-flex items-center rounded-lg px-2 py-0.5 text-[11px] font-medium whitespace-nowrap shrink-0 bg-muted text-muted-foreground">
                   +{extraCount} more
                 </span>
               )}
@@ -277,7 +277,7 @@ export function CompanionCard({
 
 export function CompanionCardSkeleton() {
   return (
-    <div className="rounded-2xl overflow-hidden bg-white shadow-[0_4px_16px_rgba(0,0,0,0.10)]">
+    <div className="rounded-2xl overflow-hidden bg-card shadow-[0_4px_16px_rgba(0,0,0,0.10)]">
       <div className="aspect-[4/5] sm:aspect-[3/4] shimmer" />
       <div className="p-3 space-y-2.5">
         <div className="flex gap-1.5">

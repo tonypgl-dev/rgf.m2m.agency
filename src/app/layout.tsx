@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Outfit, Comfortaa, Nunito, Oxanium, Inter } from "next/font/google";
 import { Footer } from "@/components/shared/footer";
+import { SplashScreen } from "@/components/shared/splash-screen";
+import { ThemeProvider } from "@/components/shared/theme-provider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -11,6 +13,36 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
+  weight: ["300", "400", "700", "800"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+});
+
+const comfortaa = Comfortaa({
+  variable: "--font-comfortaa",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
+
+const nunito = Nunito({
+  variable: "--font-nunito",
+  subsets: ["latin"],
+  weight: ["300", "800"],
+});
+
+const oxanium = Oxanium({
+  variable: "--font-oxanium",
+  subsets: ["latin"],
+  weight: ["300", "700"],
 });
 
 export const metadata: Metadata = {
@@ -72,11 +104,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} ${inter.variable} ${comfortaa.variable} ${nunito.variable} ${oxanium.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        <div className="flex-1 flex flex-col min-h-0">{children}</div>
-        <Footer />
+        <ThemeProvider>
+          <SplashScreen />
+          <div className="flex-1 flex flex-col min-h-0">{children}</div>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

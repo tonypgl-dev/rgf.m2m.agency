@@ -105,7 +105,7 @@ export function MasonryGrid({
               {/* ── Featured badge (idle) ── */}
               {isFeatured && !isPreview && (
                 <div className="absolute top-2 left-1/2 -translate-x-1/2 z-10 pointer-events-none">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 text-amber-900 text-[10px] font-extrabold tracking-wide uppercase shadow-sm whitespace-nowrap">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 text-amber-900 text-[10px] font-extrabold tracking-wide uppercase shadow-sm whitespace-nowrap">
                     🎀 Cea mai bună
                   </span>
                 </div>
@@ -120,7 +120,7 @@ export function MasonryGrid({
                   {/* Top: featured badge or spacer */}
                   <div className="flex justify-center pt-3 min-h-[28px]">
                     {isFeatured && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 text-amber-900 text-[10px] font-extrabold tracking-wide uppercase shadow-sm whitespace-nowrap">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 text-amber-900 text-[10px] font-extrabold tracking-wide uppercase shadow-sm whitespace-nowrap">
                         🎀 Cea mai bună
                       </span>
                     )}
@@ -172,7 +172,7 @@ export function MasonryGrid({
                         {card.languages.slice(0, 3).map((lang) => (
                           <span
                             key={lang}
-                            className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium whitespace-nowrap"
+                            className="inline-flex items-center rounded-lg px-2 py-0.5 text-[10px] font-medium whitespace-nowrap"
                             style={{
                               border: "1px solid rgba(255,255,255,0.30)",
                               color: LANG_COLOR[lang] ?? "white",
