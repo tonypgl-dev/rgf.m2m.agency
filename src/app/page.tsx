@@ -45,9 +45,9 @@ export default function LandingPage() {
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section
-        className="relative text-white flex flex-col items-center justify-center text-center px-4 py-28 sm:py-36 min-h-[88vh] overflow-hidden"
+        className="relative text-[var(--text-primary)] flex flex-col items-center justify-center text-center px-4 py-28 sm:py-36 min-h-[88vh] overflow-hidden"
         style={{
-          backgroundColor: "#0D0A1A",
+          backgroundColor: "var(--bg-base)",
         }}
       >
         {/* Layer 1 — Radial gradient colour wash */}
@@ -116,7 +116,7 @@ export default function LandingPage() {
         />
 
         <div className="relative z-10 max-w-3xl mx-auto">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/40 mb-8">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[var(--text-muted)] mb-8">
             Roamly · Romania
           </p>
 
@@ -131,24 +131,24 @@ export default function LandingPage() {
                 style={{ width: 10, height: 10, left: "50%", transform: "translateX(calc(-50% + 0.5px))" }}
               >
                 <span
-                  className="hero-pulse absolute inset-0 rounded-full"
+                  className="hero-pulse absolute inset-0 rounded-lg"
                   style={{
-                    background: "rgba(249,115,22,0.5)",
-                    boxShadow: "0 0 20px rgba(249,115,22,0.6), 0 0 50px rgba(249,115,22,0.25)",
+                    background: "var(--accent-orange-glow)",
+                    boxShadow: "0 0 20px var(--accent-orange-glow), 0 0 50px var(--accent-orange-glow)",
                   }}
                 />
                 <span
-                  className="absolute inset-0 rounded-full"
+                  className="absolute inset-0 rounded-lg"
                   style={{
-                    background: "#F97316",
-                    boxShadow: "0 0 12px #F97316, 0 0 30px rgba(249,115,22,0.4)",
+                    background: "var(--accent-orange)",
+                    boxShadow: "0 0 12px var(--accent-orange), 0 0 30px var(--accent-orange-glow)",
                   }}
                 />
               </span>
             </span>
           </h1>
 
-          <p className="mt-7 text-base sm:text-lg text-white/60 max-w-lg mx-auto leading-relaxed">
+          <p className="mt-7 text-base sm:text-lg text-[var(--text-secondary)] max-w-lg mx-auto leading-relaxed">
             Book a verified local for dinner, city tours, hiking, or a night out. Real
             people. Real experiences.
           </p>
@@ -158,7 +158,7 @@ export default function LandingPage() {
               href="/companions"
               className={cn(
                 "inline-flex items-center justify-center gap-2 rounded-lg",
-                "bg-accent-warm text-white font-semibold text-base",
+                "bg-accent-warm text-[var(--text-primary)] font-semibold text-base",
                 "px-8 py-3 hover:bg-accent-warm/90 transition-colors",
                 "shadow-[0_4px_24px_rgba(251,146,60,0.45)]"
               )}
@@ -169,7 +169,7 @@ export default function LandingPage() {
               href="#how-it-works"
               className={cn(
                 "inline-flex items-center justify-center rounded-lg",
-                "border border-white/20 text-white/70 hover:text-white hover:border-white/40",
+                "border border-border text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent-violet)]",
                 "font-medium text-sm px-7 py-3 transition-colors"
               )}
             >

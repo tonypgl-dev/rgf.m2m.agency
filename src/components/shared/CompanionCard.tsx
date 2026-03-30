@@ -262,8 +262,7 @@ export function CompanionCard({
           {/* Book a Guide → profile */}
           <Link
             href={`/companions/${c.id}`}
-            className="block w-full h-10 rounded-xl flex items-center justify-center gap-1.5 text-sm font-medium text-white transition-opacity hover:opacity-90 select-none"
-            style={{ backgroundColor: "#FB923C" }}
+            className="block w-full h-10 rounded-lg flex items-center justify-center gap-1.5 text-sm font-semibold text-white transition-all hover:shadow-[0_0_20px_var(--accent-orange-glow)] select-none bg-[linear-gradient(135deg,#F97316,#EA580C)]"
           >
             Book a Guide <span aria-hidden>→</span>
           </Link>

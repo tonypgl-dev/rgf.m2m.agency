@@ -555,7 +555,7 @@ function BookingSheet({
           )}
           {step === 3 && (
             <Button
-              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white"
+              className="flex-1 text-white bg-[linear-gradient(135deg,#F97316,#EA580C)] hover:shadow-[0_0_20px_var(--accent-orange-glow)]"
               disabled={submitting}
               onClick={handleBook}
             >
@@ -662,7 +662,7 @@ export function GuideProfileClient({ guide, slots, isLoggedIn }: Props) {
           <Button
             size="lg"
             onClick={openBooking}
-            className="bg-orange-500 hover:bg-orange-600 text-white px-8"
+            className="text-white px-8 bg-[linear-gradient(135deg,#F97316,#EA580C)] hover:shadow-[0_0_20px_var(--accent-orange-glow)]"
           >
             Book Now
           </Button>
@@ -814,7 +814,7 @@ export function GuideProfileClient({ guide, slots, isLoggedIn }: Props) {
           <Button
             size="lg"
             onClick={openBooking}
-            className="w-full bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-semibold text-base h-12 rounded-xl shadow-lg shadow-orange-500/20"
+            className="w-full text-white font-semibold text-base h-12 rounded-lg shadow-lg bg-[linear-gradient(135deg,#F97316,#EA580C)] hover:shadow-[0_0_20px_var(--accent-orange-glow)]"
           >
             Book Now
           </Button>

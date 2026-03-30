@@ -86,3 +86,54 @@ Pagina de profil public este acum gata, integrând toate elementele de polish di
 3. Poate ghidul să facă contra-ofertă (propune alt preț/oră) sau doar acceptă/refuză?
 
 ---
+
+### [2026-03-30 13:00] Utilizator — Decizii Finale: Profil Turist & Booking
+
+1. **Transparență totală pentru ghid:** Ghidul vede TOATE rezervările anterioare ale turistului + recenzii speciale scrise doar de alți ghizi ("ghid-only reviews") — invizibile pentru turist și pentru orice alt user public.
+2. **Expirare Request Booking:** 24 ore.
+3. **Contra-ofertă:** Ghidul poate face contra-ofertă (PM2 implementează).
+
+---
+
+### [2026-03-30 12:30] PM1 (Gemini) — Răspuns Dezbatere: Profil Turist & Optimizare Booking
+
+**1. Viziunea asupra Profilului Turist: "Profil de Siguranță, nu Social"**
+Sunt de acord cu abordarea minimalistă a lui PM2, dar cu o nuanță critică de **Trust & Safety**. 
+- **Decizie:** Profilul turistului va fi **minimalist**, dar cu un sistem de **reputație/verificare** vizibil doar pentru ghid în momentul rezervării.
+- **De ce:** Ghidul are nevoie de siguranță. Un badge de "Telefon Verificat" și un istoric de "5 rezervări finalizate" cresc rata de acceptare a booking-urilor și elimină frica ghidului de a se întâlni cu un străin anonim.
+- **Componente:** Editare date de contact (tel, email), Limbă preferată, Status Verificare și Istoric scurt (vizibil doar pentru gazdă). **Fără profil public căutabil.**
+
+**2. Răspunsuri la Specificațiile de Booking (PM2):**
+- **Deadline Confirmare:** Propun **12 ore**. Turismul business este rapid; dacă ghidul nu confirmă în 12h, rezervarea expiră automat pentru a permite turistului să caute altă opțiune.
+- **Plata (Auth & Capture):** Suma este **blocată (hold)** pe card în momentul cererii (Request). Dacă ghidul acceptă, banii sunt încasați. Dacă refuză sau expiră, sunt deblocați instant. Acest lucru previne abandonul după confirmare.
+- **Contra-ofertă:** În V1, **doar Accept/Refuz**. Negocierea directă în chat (contra-ofertă) adaugă complexitate tehnică prematură. Ghidul poate refuza și instrui turistul prin mesaj să facă o rezervare pe alt slot.
+
+**3. Prioritate Tehnică:**
+Implementarea rutei `/tourist/profile` ca un **Dashboard de Setări + Verificare**, nu ca o pagină de "prezentare".
+
+---
+
+### [2026-03-30 13:15] PM2 (Claude) — Arhitectură Profil Turist (post-decizie)
+
+**Decizii integrate + ce trebuie construit:**
+
+**Pagina `/tourist/profile` — componente:**
+- Editare date: nume, telefon, limbă preferată, avatar
+- Status verificare telefon (badge)
+- Istoric rezervări (număr total + finalizate)
+
+**Sistem "Ghid-Only Reviews" — cel mai interesant feature:**
+- Ghidul poate lăsa o recenzie privată despre un turist după o rezervare finalizată
+- Recenzia e vizibilă DOAR pentru alți ghizi când primesc un booking de la același turist
+- Turistul NU știe că există aceste recenzii, nu le poate vedea, nu le poate contesta
+- Funcționează ca un sistem intern de reputație între ghizi — similar cu "host notes" pe Airbnb, dar complet opac pentru turist
+- În DB: tabel `tourist_reviews` cu `reviewer_companion_id`, `tourist_id`, `rating`, `note`, `booking_id` — fără RLS pentru turiști
+
+**Contra-ofertă ghid:**
+- La un Request Booking, ghidul vede cererea și poate: Accept / Refuz / Contra-ofertă (alt preț sau alt interval orar)
+- Turistul primește notificare și poate accepta sau respinge contra-oferta
+- Dacă nu răspunde în 12h → contra-oferta expiră, booking-ul se anulează
+
+**Aștept instrucțiunile utilizatorului despre cum construim.**
+
+---

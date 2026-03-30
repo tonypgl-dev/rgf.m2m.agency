@@ -26,15 +26,10 @@ export async function PublicNav({ dark = false }: { dark?: boolean } = {}) {
 
   return (
     <header
-        className={cn(
-          "sticky top-0 z-40 backdrop-blur-md",
-          dark
-            ? ""
-            : "bg-background/80 border-b border-border"
-        )}
+        className={cn("sticky top-0 z-40 backdrop-blur-[16px] border-b border-border bg-[var(--bg-surface)]")}
         style={dark ? {
-          backgroundColor: "rgba(17,14,31,0.88)",
-          borderBottom: "1px solid rgba(255,255,255,0.06)",
+          backgroundColor: "var(--bg-surface)",
+          borderBottom: "1px solid var(--border)",
         } : undefined}
       >
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
@@ -56,29 +51,29 @@ export async function PublicNav({ dark = false }: { dark?: boolean } = {}) {
             <div className="absolute flex items-center justify-center pointer-events-none" style={{ top: "14.1px", left: "13.4px" }}>
               {/* Outer wave (Faded Pulse) */}
               <span 
-                className="absolute inline-flex h-4 w-4 animate-heartbeat-sonar rounded-full" 
+                className="absolute inline-flex h-4 w-4 animate-heartbeat-sonar rounded-lg" 
                 style={{ 
-                  background: 'radial-gradient(circle, rgba(249,115,22,0.8) 0%, rgba(249,115,22,0) 70%)' 
+                  background: 'radial-gradient(circle, var(--accent-orange) 0%, transparent 70%)'
                 }}
               />
               {/* Core dot */}
-              <span className="relative inline-flex rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.45)]" style={{ width: "4.2px", height: "4.2px" }} />
+              <span className="relative inline-flex rounded-lg bg-[var(--accent-orange)] shadow-[0_0_8px_var(--accent-orange-glow)]" style={{ width: "4.2px", height: "4.2px" }} />
             </div>
           </div>
           <span style={{ fontFamily: "var(--font-comfortaa)" }}>
             <span style={{
               fontSize: "1.2rem",
               fontWeight: 700, /* Comfortaa max — renders as bold */
-              color: "#A67CFF",
+              color: "var(--accent-violet)",
               letterSpacing: "-0.3px",
-              filter: "drop-shadow(0 0 6px rgba(166,124,255,0.35))",
+              filter: "drop-shadow(0 0 6px var(--accent-violet-glow))",
             }}>
               ROAM
             </span>
             <span style={{
               fontSize: "0.72rem",
               fontWeight: 400,
-              color: "var(--foreground)",
+              color: "var(--text-secondary)",
               opacity: 0.5,
               position: "relative",
               top: "1px",
@@ -94,7 +89,7 @@ export async function PublicNav({ dark = false }: { dark?: boolean } = {}) {
             href="/companions"
             className={cn(
               buttonVariants({ variant: "ghost", size: "sm" }),
-              "text-muted-foreground hover:text-foreground"
+              "font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
             )}
           >
             Guides
@@ -102,12 +97,21 @@ export async function PublicNav({ dark = false }: { dark?: boolean } = {}) {
           {dashboardHref ? (
             <Link
               href={dashboardHref}
-              className={cn(buttonVariants({ size: "sm" }))}
+              className={cn(
+                buttonVariants({ variant: "outline", size: "sm" }),
+                "font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+              )}
             >
               Dashboard
             </Link>
           ) : (
-            <Link href="/login" className={cn(buttonVariants({ size: "sm" }))}>
+            <Link
+              href="/login"
+              className={cn(
+                buttonVariants({ variant: "outline", size: "sm" }),
+                "font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+              )}
+            >
               Log in
             </Link>
           )}
