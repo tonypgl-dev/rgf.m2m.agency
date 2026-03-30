@@ -113,6 +113,25 @@
     --accent-violet: #A67CFF;
     --accent-violet-glow: rgba(166, 124, 255, 0.2);
     --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.30);
+
+    --background: var(--bg-base);
+    --foreground: var(--text-primary);
+    --card: var(--bg-surface);
+    --card-foreground: var(--text-primary);
+    --popover: var(--bg-surface);
+    --popover-foreground: var(--text-primary);
+    --primary: var(--accent-orange);
+    --primary-foreground: #ffffff;
+    --secondary: transparent;
+    --secondary-foreground: var(--text-primary);
+    --muted: var(--bg-elevated);
+    --muted-foreground: var(--text-secondary);
+    --accent: var(--accent-violet);
+    --accent-foreground: var(--text-primary);
+    --accent-warm: var(--accent-orange);
+    --destructive: #ef4444;
+    --input: var(--border);
+    --ring: var(--accent-violet);
   }
 }
 

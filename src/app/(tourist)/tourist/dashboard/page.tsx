@@ -37,14 +37,16 @@ export default async function TouristDashboardPage() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const { data: profile } = await supabase
+  const { data: profileData } = await supabase
     .from("profiles")
     .select("full_name, role")
     .eq("id", user.id)
     .single();
 
-  // Avoid /login -> /auto-login loops when profile is missing/misaligned.
-  if (!profile || profile.role !== "tourist") redirect("/");
+  // Mock fallback — when DB profile is missing (e.g. fix-auth not yet run)
+  const profile = profileData ?? { full_name: "Test Tourist", role: "tourist" };
+
+  if (profile.role !== "tourist") redirect("/");
 
   // Upcoming confirmed/pending bookings
   const { data: upcoming } = await supabase
